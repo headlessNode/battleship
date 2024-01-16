@@ -4,6 +4,7 @@ class Ship {
   constructor(length) {
     this.#length = length;
     this.#nHits = 0;
+    this.position;
   }
   hit() {
     if (this.#nHits < this.#length) {
