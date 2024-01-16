@@ -1,20 +1,22 @@
 class Ship {
   #length;
   #nHits;
-  #sunkStatus;
-  constructor(length, nHits) {
+  constructor(length) {
     this.#length = length;
-    this.#nHits = nHits;
-    this.#sunkStatus = false;
+    this.#nHits = 0;
   }
   hit() {
-    this.#nHits++;
+    if (this.#nHits < this.#length) {
+      this.#nHits++;
+    } else {
+      throw new Error('Hits cannot exceed length');
+    }
   }
   isSunk() {
     if (this.#length === this.#nHits) {
-      this.#sunkStatus = true;
+      return true;
     } else {
-      this.#sunkStatus = false;
+      return false;
     }
   }
 }
