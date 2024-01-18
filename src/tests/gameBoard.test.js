@@ -1,6 +1,5 @@
 import { expect, jest, test } from '@jest/globals';
 import Gameboard from '../modules/gameBoard.js';
-import Ship from '../modules/ship.js';
 
 describe('test gameBoard methods', () => {
   const boardOne = new Gameboard();
@@ -22,9 +21,9 @@ describe('test gameBoard methods', () => {
     for (let i = 0; i < boardOne.coordinates.length; i++) {
       for (let j = 0; j < boardOne.coordinates[i].length; j++) {
         if (positionRow === i && positionCol === j) {
-          expect(boardOne.coordinates[i][j]).toEqual(1);
+          expect(boardOne.coordinates[i][j]).toEqual(shipObject);
         } else if (positionRow === i && j > positionCol && j <= shipEndpoint) {
-          expect(boardOne.coordinates[i][j]).toEqual(1);
+          expect(boardOne.coordinates[i][j]).toEqual(shipObject);
         }
       }
     }
@@ -47,7 +46,7 @@ describe('test gameBoard methods', () => {
     for (let i = 0; i < boardOne.coordinates.length; i++) {
       for (let j = 0; j < boardOne.coordinates[i].length; j++) {
         if (j === positionCol && i > positionRow && i <= shipEndpoint) {
-          expect(boardOne.coordinates[i][j]).toEqual(1);
+          expect(boardOne.coordinates[i][j]).toEqual(shipObject);
         }
       }
     }

@@ -28,7 +28,7 @@ class Gameboard {
       for (let i = 0; i < this.coordinates.length; i++) {
         for (let j = 0; j < this.coordinates[i].length; j++) {
           if (j >= positionCol && j <= shipEndpoint) {
-            this.coordinates[i][j] = 1;
+            this.coordinates[i][j] = shipObject;
           }
         }
       }
@@ -38,7 +38,7 @@ class Gameboard {
       for (let i = 0; i < this.coordinates.length; i++) {
         for (let j = 0; j < this.coordinates[i].length; j++) {
           if (j === positionCol && i <= shipEndpoint) {
-            this.coordinates[i][j] = 1;
+            this.coordinates[i][j] = shipObject;
           }
         }
       }
