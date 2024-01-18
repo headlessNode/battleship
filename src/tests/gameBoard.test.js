@@ -4,14 +4,21 @@ import Ship from '../modules/ship.js';
 
 describe('test gameBoard methods', () => {
   const boardOne = new Gameboard();
-  const shipObject = new Ship(4);
   test('place ship at specific coordinates with horizontal orientation', () => {
+    const shipLength = 4;
+    const shipOrientation = 'H';
     const shipPosition = [3, 4];
+    const shipObject = boardOne.placeShip(
+      shipLength,
+      shipPosition,
+      shipOrientation,
+    );
     const positionRow = shipPosition[0];
     const positionCol = shipPosition[1];
     const shipEndpoint = positionCol + shipObject.length;
-    boardOne.placeShip(shipObject, shipPosition, 'H');
-    expect(shipObject.orientation).toMatch('H');
+    expect(shipObject.orientation).toMatch(shipOrientation);
+    expect(shipObject.startPostion).toEqual(shipPosition);
+    expect(shipObject.endPosition).toEqual(shipEndpoint);
     for (let i = 0; i < boardOne.coordinates.length; i++) {
       for (let j = 0; j < boardOne.coordinates[i].length; j++) {
         if (positionRow === i && positionCol === j) {
@@ -23,12 +30,20 @@ describe('test gameBoard methods', () => {
     }
   });
   test('place ship at specific coordinates with vertical orientation', () => {
+    const shipLength = 4;
+    const shipOrientation = 'H';
     const shipPosition = [3, 4];
+    const shipObject = boardOne.placeShip(
+      shipLength,
+      shipPosition,
+      shipOrientation,
+    );
     const positionRow = shipPosition[0];
     const positionCol = shipPosition[1];
-    const shipEndpoint = positionRow + shipObject.length;
-    boardOne.placeShip(shipObject, shipPosition, 'V');
-    expect(shipObject.orientation).toMatch('V');
+    const shipEndpoint = positionCol + shipObject.length;
+    expect(shipObject.orientation).toMatch(shipOrientation);
+    expect(shipObject.startPostion).toEqual(shipPosition);
+    expect(shipObject.endPosition).toEqual(shipEndpoint);
     for (let i = 0; i < boardOne.coordinates.length; i++) {
       for (let j = 0; j < boardOne.coordinates[i].length; j++) {
         if (j === positionCol && i > positionRow && i <= shipEndpoint) {

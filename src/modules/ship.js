@@ -1,9 +1,11 @@
 class Ship {
   #nHits;
-  constructor(length) {
-    this.length = length;
+  constructor(length, orientation) {
     this.#nHits = 0;
-    this.orientation;
+    this.length = length;
+    this.orientation = orientation;
+    this.startPostion = null;
+    this.endPosition = null;
   }
   hit() {
     if (this.#nHits < this.length) {
