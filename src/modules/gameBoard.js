@@ -133,28 +133,44 @@ class Gameboard {
     const positionCol = position[1];
     if (this.coordinates[positionRow][positionCol].ship === null) {
       if (shipObject.orientation === 'H') {
-        const shipEndpoint = positionCol + shipObject.length;
-        shipObject.endPosition = shipEndpoint;
-        for (let i = 0; i < this.coordinates.length; i++) {
-          for (let j = 0; j < this.coordinates[i].length; j++) {
-            if (j >= positionCol && j <= shipEndpoint) {
-              this.coordinates[i][j].ship = shipObject;
+        if (positionCol + shipObject.length <= 9) {
+          const shipEndpoint = positionCol + shipObject.length;
+          shipObject.endPosition = shipEndpoint;
+          for (let i = 0; i < this.coordinates.length; i++) {
+            for (let j = 0; j < this.coordinates[i].length; j++) {
+              if (i === positionRow && j >= positionCol && j <= shipEndpoint) {
+                if (this.coordinates[i][j].ship === null) {
+                  this.coordinates[i][j].ship = shipObject;
+                } else {
+                  throw new Error('Invalid position: Already contains a ship');
+                }
+              }
             }
           }
+        } else {
+          throw new Error('Invalid Position: Out of bounds.');
         }
       } else if (shipObject.orientation === 'V') {
-        const shipEndpoint = positionRow + shipObject.length;
-        shipObject.endPosition = shipEndpoint;
-        for (let i = 0; i < this.coordinates.length; i++) {
-          for (let j = 0; j < this.coordinates[i].length; j++) {
-            if (j === positionCol && i <= shipEndpoint) {
-              this.coordinates[i][j].ship = shipObject;
+        if (positionRow + shipObject.length <= 9) {
+          const shipEndpoint = positionRow + shipObject.length;
+          shipObject.endPosition = shipEndpoint;
+          for (let i = 0; i < this.coordinates.length; i++) {
+            for (let j = 0; j < this.coordinates[i].length; j++) {
+              if (j === positionCol && i >= positionRow && i <= shipEndpoint) {
+                if (this.coordinates[i][j].ship === null) {
+                  this.coordinates[i][j].ship = shipObject;
+                } else {
+                  throw new Error('Invalid position: Already contains a ship');
+                }
+              }
             }
           }
+        } else {
+          throw new Error('Invalid Position: Out of bounds.');
         }
       }
     } else {
-      throw new Error('Invalid position. Already contains a ship');
+      throw new Error('Invalid position: Already contains a ship');
     }
 
     return shipObject;
