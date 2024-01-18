@@ -3,16 +3,126 @@ import Ship from './ship.js';
 class Gameboard {
   constructor() {
     this.coordinates = [
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+      ],
+      [
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+      ],
+      [
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+      ],
+      [
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+      ],
+      [
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+      ],
+      [
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+      ],
+      [
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+      ],
+      [
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+      ],
+      [
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+      ],
+      [
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+        { ship: null, isHit: false },
+      ],
     ];
   }
   //Gameboards should be able to place ships at specific coordinates by calling the ship factory function.
@@ -28,7 +138,7 @@ class Gameboard {
       for (let i = 0; i < this.coordinates.length; i++) {
         for (let j = 0; j < this.coordinates[i].length; j++) {
           if (j >= positionCol && j <= shipEndpoint) {
-            this.coordinates[i][j] = shipObject;
+            this.coordinates[i][j].ship = shipObject;
           }
         }
       }
@@ -38,7 +148,7 @@ class Gameboard {
       for (let i = 0; i < this.coordinates.length; i++) {
         for (let j = 0; j < this.coordinates[i].length; j++) {
           if (j === positionCol && i <= shipEndpoint) {
-            this.coordinates[i][j] = shipObject;
+            this.coordinates[i][j].ship = shipObject;
           }
         }
       }

@@ -21,9 +21,9 @@ describe('test gameBoard methods', () => {
     for (let i = 0; i < boardOne.coordinates.length; i++) {
       for (let j = 0; j < boardOne.coordinates[i].length; j++) {
         if (positionRow === i && positionCol === j) {
-          expect(boardOne.coordinates[i][j]).toEqual(shipObject);
+          expect(boardOne.coordinates[i][j].ship).toEqual(shipObject);
         } else if (positionRow === i && j > positionCol && j <= shipEndpoint) {
-          expect(boardOne.coordinates[i][j]).toEqual(shipObject);
+          expect(boardOne.coordinates[i][j].ship).toEqual(shipObject);
         }
       }
     }
@@ -46,7 +46,7 @@ describe('test gameBoard methods', () => {
     for (let i = 0; i < boardOne.coordinates.length; i++) {
       for (let j = 0; j < boardOne.coordinates[i].length; j++) {
         if (j === positionCol && i > positionRow && i <= shipEndpoint) {
-          expect(boardOne.coordinates[i][j]).toEqual(shipObject);
+          expect(boardOne.coordinates[i][j].ship).toEqual(shipObject);
         }
       }
     }
