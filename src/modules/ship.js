@@ -3,7 +3,7 @@ class Ship {
   constructor(length) {
     this.length = length;
     this.#nHits = 0;
-    this.orientatoin;
+    this.orientation;
   }
   hit() {
     if (this.#nHits < this.length) {
