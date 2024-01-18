@@ -111,7 +111,10 @@ class Gameboard {
     ];
   }
   //Gameboards should be able to place ships at specific coordinates by calling the ship factory function.
-  placeShip(shipObject, position) {}
+  placeShip(shipObject, position, orientation) {
+    shipObject.position = position;
+    shipObject.orientation = orientation;
+  }
 }
 
 export default Gameboard;

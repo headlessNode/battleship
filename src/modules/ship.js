@@ -5,6 +5,7 @@ class Ship {
     this.#length = length;
     this.#nHits = 0;
     this.position;
+    this.orientatoin;
   }
   hit() {
     if (this.#nHits < this.#length) {
