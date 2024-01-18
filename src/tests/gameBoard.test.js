@@ -51,4 +51,26 @@ describe('test gameBoard methods', () => {
       }
     }
   });
+  test('place ship at specific coordinates and gameboard recieves an attack on that coordinate', () => {
+    const shipLength = 4;
+    const shipOrientation = 'V';
+    const shipPosition = [6, 8];
+    const shipObject = boardOne.placeShip(
+      shipLength,
+      shipPosition,
+      shipOrientation,
+    );
+    boardOne.receiveAttack([6, 8]);
+    expect(boardOne.coordinates[6][8]).toEqual({
+      ship: shipObject,
+      isHit: true,
+    });
+  });
+  test('gameboard recieves an attack on a coordinate without a ship', () => {
+    boardOne.receiveAttack([6, 8]);
+    expect(boardOne.coordinates[6][8]).toEqual({
+      ship: null,
+      isHit: true,
+    });
+  });
 });
