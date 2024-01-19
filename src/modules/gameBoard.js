@@ -134,7 +134,7 @@ class Gameboard {
     if (this.coordinates[positionRow][positionCol].ship === null) {
       if (shipObject.orientation === 'H') {
         if (positionCol + shipObject.length <= 9) {
-          const shipEndpoint = positionCol + shipObject.length;
+          const shipEndpoint = positionCol + (shipObject.length - 1);
           shipObject.endPosition = shipEndpoint;
           for (let i = 0; i < this.coordinates.length; i++) {
             for (let j = 0; j < this.coordinates[i].length; j++) {
@@ -152,7 +152,7 @@ class Gameboard {
         }
       } else if (shipObject.orientation === 'V') {
         if (positionRow + shipObject.length <= 9) {
-          const shipEndpoint = positionRow + shipObject.length;
+          const shipEndpoint = positionRow + (shipObject.length - 1);
           shipObject.endPosition = shipEndpoint;
           for (let i = 0; i < this.coordinates.length; i++) {
             for (let j = 0; j < this.coordinates[i].length; j++) {

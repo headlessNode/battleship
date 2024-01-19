@@ -14,7 +14,7 @@ describe('test gameBoard methods', () => {
     );
     const positionRow = shipPosition[0];
     const positionCol = shipPosition[1];
-    const shipEndpoint = positionCol + shipObject.length;
+    const shipEndpoint = positionCol + (shipObject.length - 1);
     expect(shipObject.orientation).toMatch(shipOrientation);
     expect(shipObject.startPostion).toEqual(shipPosition);
     expect(shipObject.endPosition).toEqual(shipEndpoint);
@@ -39,7 +39,7 @@ describe('test gameBoard methods', () => {
     );
     const positionRow = shipPosition[0];
     const positionCol = shipPosition[1];
-    const shipEndpoint = positionRow + shipObject.length;
+    const shipEndpoint = positionRow + (shipObject.length - 1);
     expect(shipObject.orientation).toMatch(shipOrientation);
     expect(shipObject.startPostion).toEqual(shipPosition);
     expect(shipObject.endPosition).toEqual(shipEndpoint);
@@ -78,7 +78,7 @@ describe('test gameBoard methods', () => {
       shipOrientation,
     );
     const positionRow = shipPosition[0];
-    const shipEndpoint = positionRow + shipObject.length;
+    const shipEndpoint = positionRow + (shipObject.length - 1);
     expect(shipObject.orientation).toMatch(shipOrientation);
     expect(shipObject.startPostion).toEqual(shipPosition);
     expect(shipObject.endPosition).toEqual(shipEndpoint);
@@ -86,6 +86,7 @@ describe('test gameBoard methods', () => {
     expect(boardOne.coordinates[5][8]).toEqual({
       ship: shipObject,
       isHit: true,
+      isSunk: false,
     });
   });
   test('gameboard recieves an attack on a coordinate without a ship', () => {
@@ -93,6 +94,29 @@ describe('test gameBoard methods', () => {
     expect(boardOne.coordinates[6][7]).toEqual({
       ship: null,
       isHit: true,
+      isSunk: false,
     });
+  });
+  test('ship is hit times equal to its length, all isSunk properties corresponding to that ship coordinates must be true', () => {
+    const shipLength = 4;
+    const shipOrientation = 'V';
+    const shipPosition = [0, 0];
+    const shipObject = boardOne.placeShip(
+      shipLength,
+      shipPosition,
+      shipOrientation,
+    );
+    boardOne.receiveAttack([0, 0]);
+    boardOne.receiveAttack([1, 0]);
+    boardOne.receiveAttack([2, 0]);
+    boardOne.receiveAttack([3, 0]);
+    expect(boardOne.coordinates[0][0].ship).toEqual(shipObject);
+    expect(boardOne.coordinates[1][0].ship).toEqual(shipObject);
+    expect(boardOne.coordinates[2][0].ship).toEqual(shipObject);
+    expect(boardOne.coordinates[3][0].ship).toEqual(shipObject);
+    expect(boardOne.coordinates[0][0].isSunk).toBe(true);
+    expect(boardOne.coordinates[1][0].isSunk).toBe(true);
+    expect(boardOne.coordinates[2][0].isSunk).toBe(true);
+    expect(boardOne.coordinates[3][0].isSunk).toBe(true);
   });
 });
