@@ -133,9 +133,9 @@ class Gameboard {
     const positionCol = position[1];
     if (this.coordinates[positionRow][positionCol].ship === null) {
       if (shipObject.orientation === 'H') {
-        if (positionCol + shipObject.length <= 9) {
-          const shipEndpoint = positionCol + (shipObject.length - 1);
-          shipObject.endPosition = shipEndpoint;
+        const shipEndpoint = positionCol + (shipObject.length - 1);
+        shipObject.endPosition = shipEndpoint;
+        if (shipObject.endPosition <= 9) {
           for (let i = 0; i < this.coordinates.length; i++) {
             for (let j = 0; j < this.coordinates[i].length; j++) {
               if (i === positionRow && j >= positionCol && j <= shipEndpoint) {
@@ -151,9 +151,9 @@ class Gameboard {
           throw new Error('Invalid Position: Out of bounds.');
         }
       } else if (shipObject.orientation === 'V') {
-        if (positionRow + shipObject.length <= 9) {
-          const shipEndpoint = positionRow + (shipObject.length - 1);
-          shipObject.endPosition = shipEndpoint;
+        const shipEndpoint = positionRow + (shipObject.length - 1);
+        shipObject.endPosition = shipEndpoint;
+        if (shipObject.endPosition <= 9) {
           for (let i = 0; i < this.coordinates.length; i++) {
             for (let j = 0; j < this.coordinates[i].length; j++) {
               if (j === positionCol && i >= positionRow && i <= shipEndpoint) {
@@ -197,6 +197,24 @@ class Gameboard {
         }
       }
     });
+  }
+  allShipsSunk() {
+    let shipsNotSunk = [];
+    for (let i = 0; i < this.coordinates.length; i++) {
+      for (let j = 0; j < this.coordinates[i].length; j++) {
+        if (
+          this.coordinates[i][j].ship !== null &&
+          this.coordinates[i][j].isSunk === false
+        ) {
+          shipsNotSunk.push(this.coordinates[i][j].ship);
+        }
+      }
+    }
+    if (shipsNotSunk.length > 0) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
 

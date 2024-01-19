@@ -119,4 +119,44 @@ describe('test gameBoard methods', () => {
     expect(boardOne.coordinates[2][0].isSunk).toBe(true);
     expect(boardOne.coordinates[3][0].isSunk).toBe(true);
   });
+  describe('test for gameboard method allShipsSunk', () => {
+    test('all ships are sunk', () => {
+      const boardTwo = new Gameboard();
+      const shipOne = boardTwo.placeShip(3, [0, 0], 'V');
+      const shipTwo = boardTwo.placeShip(4, [0, 1], 'H');
+      const shipThree = boardTwo.placeShip(2, [4, 5], 'V');
+      const shipFour = boardTwo.placeShip(1, [9, 9], 'H');
+      boardTwo.receiveAttack([0, 0]);
+      boardTwo.receiveAttack([1, 0]);
+      boardTwo.receiveAttack([2, 0]);
+      boardTwo.receiveAttack([0, 1]);
+      boardTwo.receiveAttack([0, 2]);
+      boardTwo.receiveAttack([0, 3]);
+      boardTwo.receiveAttack([0, 4]);
+      boardTwo.receiveAttack([4, 5]);
+      boardTwo.receiveAttack([5, 5]);
+      boardTwo.receiveAttack([9, 9]);
+
+      expect(boardTwo.allShipsSunk()).toBe(true);
+    });
+    test('some ships are sunk', () => {
+      const boardThree = new Gameboard();
+      const shipOne = boardThree.placeShip(3, [0, 0], 'V');
+      const shipTwo = boardThree.placeShip(4, [0, 1], 'H');
+      const shipThree = boardThree.placeShip(2, [4, 5], 'V');
+      const shipFour = boardThree.placeShip(1, [9, 9], 'H');
+      boardThree.receiveAttack([0, 0]);
+      boardThree.receiveAttack([1, 0]);
+      boardThree.receiveAttack([2, 0]);
+      boardThree.receiveAttack([1, 0]);
+      boardThree.receiveAttack([1, 1]);
+      boardThree.receiveAttack([1, 2]);
+      boardThree.receiveAttack([1, 3]);
+      boardThree.receiveAttack([4, 5]);
+      boardThree.receiveAttack([5, 5]);
+      boardThree.receiveAttack([9, 9]);
+
+      expect(boardThree.allShipsSunk()).toBe(false);
+    });
+  });
 });
