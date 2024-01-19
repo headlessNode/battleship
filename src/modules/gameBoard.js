@@ -184,7 +184,13 @@ class Gameboard {
           value.ship.hit();
           value.isHit = true;
           if (value.ship.isSunk()) {
-            value.isSunk = true;
+            for (let i = 0; i < this.coordinates.length; i++) {
+              for (let j = 0; j < this.coordinates[i].length; j++) {
+                if (this.coordinates[i][j].ship === value.ship) {
+                  this.coordinates[i][j].isSunk = true;
+                }
+              }
+            }
           }
         } else if (value.isHit === false && value.ship === null) {
           value.isHit = true;
