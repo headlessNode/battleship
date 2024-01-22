@@ -1,3 +1,4 @@
+import '../styles/style.css';
 import Gameboard from './gameBoard.js';
 import Player from './player.js';
 
