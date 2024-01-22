@@ -7,23 +7,16 @@ describe('test gameBoard methods', () => {
     const shipLength = 4;
     const shipOrientation = 'H';
     const shipPosition = [3, 4];
-    const shipObject = boardOne.placeShip(
-      shipLength,
-      shipPosition,
-      shipOrientation,
-    );
+    boardOne.placeShip(shipLength, shipPosition, shipOrientation);
     const positionRow = shipPosition[0];
     const positionCol = shipPosition[1];
-    const shipEndpoint = positionCol + (shipObject.length - 1);
-    expect(shipObject.orientation).toMatch(shipOrientation);
-    expect(shipObject.startPostion).toEqual(shipPosition);
-    expect(shipObject.endPosition).toEqual(shipEndpoint);
+    const shipEndpoint = positionCol + (shipLength - 1);
     for (let i = 0; i < boardOne.coordinates.length; i++) {
       for (let j = 0; j < boardOne.coordinates[i].length; j++) {
         if (positionRow === i && positionCol === j) {
-          expect(boardOne.coordinates[i][j].ship).toEqual(shipObject);
+          expect(boardOne.coordinates[i][j].ship).not.toBe(null);
         } else if (positionRow === i && j >= positionCol && j <= shipEndpoint) {
-          expect(boardOne.coordinates[i][j].ship).toEqual(shipObject);
+          expect(boardOne.coordinates[i][j].ship).not.toBe(null);
         }
       }
     }
@@ -32,21 +25,14 @@ describe('test gameBoard methods', () => {
     const shipLength = 4;
     const shipOrientation = 'V';
     const shipPosition = [2, 3];
-    const shipObject = boardOne.placeShip(
-      shipLength,
-      shipPosition,
-      shipOrientation,
-    );
+    boardOne.placeShip(shipLength, shipPosition, shipOrientation);
     const positionRow = shipPosition[0];
     const positionCol = shipPosition[1];
-    const shipEndpoint = positionRow + (shipObject.length - 1);
-    expect(shipObject.orientation).toMatch(shipOrientation);
-    expect(shipObject.startPostion).toEqual(shipPosition);
-    expect(shipObject.endPosition).toEqual(shipEndpoint);
+    const shipEndpoint = positionRow + (shipLength - 1);
     for (let i = 0; i < boardOne.coordinates.length; i++) {
       for (let j = 0; j < boardOne.coordinates[i].length; j++) {
         if (j === positionCol && i >= positionRow && i <= shipEndpoint) {
-          expect(boardOne.coordinates[i][j].ship).toEqual(shipObject);
+          expect(boardOne.coordinates[i][j].ship).not.toBe(null);
         }
       }
     }
@@ -72,48 +58,29 @@ describe('test gameBoard methods', () => {
     const shipLength = 4;
     const shipOrientation = 'V';
     const shipPosition = [5, 8];
-    const shipObject = boardOne.placeShip(
-      shipLength,
-      shipPosition,
-      shipOrientation,
-    );
-    const positionRow = shipPosition[0];
-    const shipEndpoint = positionRow + (shipObject.length - 1);
-    expect(shipObject.orientation).toMatch(shipOrientation);
-    expect(shipObject.startPostion).toEqual(shipPosition);
-    expect(shipObject.endPosition).toEqual(shipEndpoint);
+    boardOne.placeShip(shipLength, shipPosition, shipOrientation);
     boardOne.receiveAttack([5, 8]);
-    expect(boardOne.coordinates[5][8]).toEqual({
-      ship: shipObject,
-      isHit: true,
-      isSunk: false,
-    });
+    expect(boardOne.coordinates[5][8].isHit).toBe(true);
+    expect(boardOne.coordinates[5][8].ship).not.toBe(null);
   });
   test('gameboard recieves an attack on a coordinate without a ship', () => {
     boardOne.receiveAttack([6, 7]);
-    expect(boardOne.coordinates[6][7]).toEqual({
-      ship: null,
-      isHit: true,
-      isSunk: false,
-    });
+    expect(boardOne.coordinates[6][7].isHit).toBe(true);
+    expect(boardOne.coordinates[6][7].ship).toBe(null);
   });
   test('ship is hit times equal to its length, all isSunk properties corresponding to that ship coordinates must be true', () => {
     const shipLength = 4;
     const shipOrientation = 'V';
     const shipPosition = [0, 0];
-    const shipObject = boardOne.placeShip(
-      shipLength,
-      shipPosition,
-      shipOrientation,
-    );
+    boardOne.placeShip(shipLength, shipPosition, shipOrientation);
     boardOne.receiveAttack([0, 0]);
     boardOne.receiveAttack([1, 0]);
     boardOne.receiveAttack([2, 0]);
     boardOne.receiveAttack([3, 0]);
-    expect(boardOne.coordinates[0][0].ship).toEqual(shipObject);
-    expect(boardOne.coordinates[1][0].ship).toEqual(shipObject);
-    expect(boardOne.coordinates[2][0].ship).toEqual(shipObject);
-    expect(boardOne.coordinates[3][0].ship).toEqual(shipObject);
+    expect(boardOne.coordinates[0][0].ship).not.toBe(null);
+    expect(boardOne.coordinates[1][0].ship).not.toBe(null);
+    expect(boardOne.coordinates[2][0].ship).not.toBe(null);
+    expect(boardOne.coordinates[3][0].ship).not.toBe(null);
     expect(boardOne.coordinates[0][0].isSunk).toBe(true);
     expect(boardOne.coordinates[1][0].isSunk).toBe(true);
     expect(boardOne.coordinates[2][0].isSunk).toBe(true);
@@ -122,10 +89,10 @@ describe('test gameBoard methods', () => {
   describe('test for gameboard method allShipsSunk', () => {
     test('all ships are sunk', () => {
       const boardTwo = new Gameboard();
-      const shipOne = boardTwo.placeShip(3, [0, 0], 'V');
-      const shipTwo = boardTwo.placeShip(4, [0, 1], 'H');
-      const shipThree = boardTwo.placeShip(2, [4, 5], 'V');
-      const shipFour = boardTwo.placeShip(1, [9, 9], 'H');
+      boardTwo.placeShip(3, [0, 0], 'V');
+      boardTwo.placeShip(4, [0, 1], 'H');
+      boardTwo.placeShip(2, [4, 5], 'V');
+      boardTwo.placeShip(1, [9, 9], 'H');
       boardTwo.receiveAttack([0, 0]);
       boardTwo.receiveAttack([1, 0]);
       boardTwo.receiveAttack([2, 0]);
@@ -141,10 +108,10 @@ describe('test gameBoard methods', () => {
     });
     test('some ships are sunk', () => {
       const boardThree = new Gameboard();
-      const shipOne = boardThree.placeShip(3, [0, 0], 'V');
-      const shipTwo = boardThree.placeShip(4, [0, 1], 'H');
-      const shipThree = boardThree.placeShip(2, [4, 5], 'V');
-      const shipFour = boardThree.placeShip(1, [9, 9], 'H');
+      boardThree.placeShip(3, [0, 0], 'V');
+      boardThree.placeShip(4, [0, 1], 'H');
+      boardThree.placeShip(2, [4, 5], 'V');
+      boardThree.placeShip(1, [9, 9], 'H');
       boardThree.receiveAttack([0, 0]);
       boardThree.receiveAttack([1, 0]);
       boardThree.receiveAttack([2, 0]);

@@ -172,8 +172,6 @@ class Gameboard {
     } else {
       throw new Error('Invalid position: Already contains a ship');
     }
-
-    return shipObject;
   }
   receiveAttack(position) {
     const positionRow = position[0];
