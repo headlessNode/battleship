@@ -36,7 +36,7 @@ function renderGameBoards(humanBoard, aiBoard) {
       block.classList.add('block');
       block.classList.add(`indexY-${i}`);
       block.classList.add(`indexX-${j}`);
-      if (humanBoard.coordinates[i][j].ship) {
+      if (aiBoard.coordinates[i][j].ship) {
         block.style.border = '2px solid #00f';
       } else {
         block.style.border = '1px solid #b4b4ff';
