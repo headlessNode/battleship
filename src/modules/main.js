@@ -17,7 +17,31 @@ function renderGameBoards(humanBoard, aiBoard) {
     for (let j = 0; j <= 9; j++) {
       const block = document.createElement('div');
       block.classList.add('block');
-      row.appendChild('block');
+      block.classList.add(`indexY-${i}`);
+      block.classList.add(`indexX-${j}`);
+      if (humanBoard.coordinates[i][j].ship) {
+        block.style.border = '2px solid #00f';
+      } else {
+        block.style.border = '1px solid #b4b4ff';
+      }
+      row.appendChild(block);
+    }
+  }
+  for (let i = 0; i <= 9; i++) {
+    const row = document.createElement('div');
+    row.classList.add('row');
+    boardTwo.appendChild(row);
+    for (let j = 0; j <= 9; j++) {
+      const block = document.createElement('div');
+      block.classList.add('block');
+      block.classList.add(`indexY-${i}`);
+      block.classList.add(`indexX-${j}`);
+      if (humanBoard.coordinates[i][j].ship) {
+        block.style.border = '2px solid #00f';
+      } else {
+        block.style.border = '1px solid #b4b4ff';
+      }
+      row.appendChild(block);
     }
   }
 }
