@@ -6,6 +6,22 @@ function getPlayerName() {
   return prompt('Enter your name:');
 }
 
+function renderGameBoards(humanBoard, aiBoard) {
+  const boardOne = document.querySelector('.board-one');
+  const boardTwo = document.querySelector('.board-two');
+
+  for (let i = 0; i <= 9; i++) {
+    const row = document.createElement('div');
+    row.classList.add('row');
+    boardOne.appendChild(row);
+    for (let j = 0; j <= 9; j++) {
+      const block = document.createElement('div');
+      block.classList.add('block');
+      row.appendChild('block');
+    }
+  }
+}
+
 const gameController = (() => {
   //create gameboards
   const playerGameBoard = new Gameboard();
@@ -36,4 +52,6 @@ const gameController = (() => {
   aiPlayer.placeShipOnBoard(3, [6, 1], 'V');
   aiPlayer.placeShipOnBoard(3, [7, 3], 'V');
   aiPlayer.placeShipOnBoard(4, [3, 3], 'H');
+  //render gameboards
+  renderGameBoards(humanPlayer.board, aiPlayer.board);
 })();
