@@ -167,7 +167,7 @@ class Gameboard {
           ) {
             this.coordinates[positionRow][shipEndpoint + 1].ship = 'x';
           }
-          for (let i = 0; i <= shipObject.length + 2; i++) {
+          for (let i = 0; i <= shipObject.length - 1 + 2; i++) {
             if (
               topAdjacentRow >= 0 &&
               topAdjacentRow <= 9 &&
@@ -225,7 +225,7 @@ class Gameboard {
           ) {
             this.coordinates[shipEndpoint + 1][positionCol].ship = 'x';
           }
-          for (let i = 0; i <= shipObject.length + 2; i++) {
+          for (let i = 0; i <= shipObject.length - 1 + 2; i++) {
             if (
               leftAdjacentRow >= 0 &&
               leftAdjacentRow <= 9 &&

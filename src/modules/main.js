@@ -19,7 +19,10 @@ function renderGameBoards(humanBoard, aiBoard) {
       block.classList.add('block');
       block.classList.add(`indexY-${i}`);
       block.classList.add(`indexX-${j}`);
-      if (humanBoard.coordinates[i][j].ship) {
+      if (
+        humanBoard.coordinates[i][j].ship !== null &&
+        humanBoard.coordinates[i][j].ship !== 'x'
+      ) {
         block.style.border = '2px solid #00f';
       } else {
         block.style.border = '1px solid #b4b4ff';
@@ -36,7 +39,10 @@ function renderGameBoards(humanBoard, aiBoard) {
       block.classList.add('block');
       block.classList.add(`indexY-${i}`);
       block.classList.add(`indexX-${j}`);
-      if (aiBoard.coordinates[i][j].ship) {
+      if (
+        aiBoard.coordinates[i][j].ship !== null &&
+        aiBoard.coordinates[i][j].ship !== 'x'
+      ) {
         block.style.border = '2px solid #00f';
       } else {
         block.style.border = '1px solid #b4b4ff';
@@ -56,26 +62,26 @@ const gameController = (() => {
   //place ships
   const shipSizes = [1, 1, 1, 1, 2, 2, 2, 3, 3, 4];
   humanPlayer.placeShipOnBoard(1, [0, 0], 'V');
-  humanPlayer.placeShipOnBoard(1, [0, 1], 'V');
-  humanPlayer.placeShipOnBoard(1, [5, 3], 'V');
-  humanPlayer.placeShipOnBoard(1, [2, 7], 'V');
-  humanPlayer.placeShipOnBoard(2, [0, 3], 'V');
-  humanPlayer.placeShipOnBoard(2, [3, 9], 'V');
-  humanPlayer.placeShipOnBoard(2, [7, 6], 'V');
-  humanPlayer.placeShipOnBoard(3, [6, 1], 'V');
-  humanPlayer.placeShipOnBoard(3, [7, 3], 'V');
-  humanPlayer.placeShipOnBoard(4, [3, 3], 'H');
+  humanPlayer.placeShipOnBoard(1, [0, 9], 'V');
+  humanPlayer.placeShipOnBoard(1, [9, 0], 'V');
+  humanPlayer.placeShipOnBoard(1, [9, 9], 'V');
+  humanPlayer.placeShipOnBoard(2, [1, 5], 'V');
+  humanPlayer.placeShipOnBoard(2, [6, 3], 'V');
+  humanPlayer.placeShipOnBoard(2, [3, 1], 'V');
+  humanPlayer.placeShipOnBoard(3, [4, 7], 'V');
+  humanPlayer.placeShipOnBoard(3, [4, 5], 'V');
+  humanPlayer.placeShipOnBoard(4, [9, 2], 'H');
 
   aiPlayer.placeShipOnBoard(1, [0, 0], 'V');
-  aiPlayer.placeShipOnBoard(1, [9, 2], 'V');
-  aiPlayer.placeShipOnBoard(1, [5, 3], 'V');
-  aiPlayer.placeShipOnBoard(1, [2, 7], 'V');
-  aiPlayer.placeShipOnBoard(2, [0, 3], 'V');
-  aiPlayer.placeShipOnBoard(2, [3, 9], 'V');
-  aiPlayer.placeShipOnBoard(2, [7, 6], 'V');
-  aiPlayer.placeShipOnBoard(3, [6, 1], 'V');
-  aiPlayer.placeShipOnBoard(3, [7, 3], 'V');
-  aiPlayer.placeShipOnBoard(4, [3, 3], 'H');
+  aiPlayer.placeShipOnBoard(1, [0, 9], 'V');
+  aiPlayer.placeShipOnBoard(1, [9, 0], 'V');
+  aiPlayer.placeShipOnBoard(1, [9, 9], 'V');
+  aiPlayer.placeShipOnBoard(2, [1, 5], 'V');
+  aiPlayer.placeShipOnBoard(2, [6, 3], 'V');
+  aiPlayer.placeShipOnBoard(2, [3, 1], 'V');
+  aiPlayer.placeShipOnBoard(3, [4, 7], 'V');
+  aiPlayer.placeShipOnBoard(3, [4, 5], 'V');
+  aiPlayer.placeShipOnBoard(4, [9, 2], 'H');
   //render gameboards
   renderGameBoards(humanPlayer.board, aiPlayer.board);
 })();
