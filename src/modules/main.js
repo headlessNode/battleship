@@ -56,7 +56,7 @@ const gameController = (() => {
   //place ships
   const shipSizes = [1, 1, 1, 1, 2, 2, 2, 3, 3, 4];
   humanPlayer.placeShipOnBoard(1, [0, 0], 'V');
-  humanPlayer.placeShipOnBoard(1, [9, 2], 'V');
+  humanPlayer.placeShipOnBoard(1, [0, 1], 'V');
   humanPlayer.placeShipOnBoard(1, [5, 3], 'V');
   humanPlayer.placeShipOnBoard(1, [2, 7], 'V');
   humanPlayer.placeShipOnBoard(2, [0, 3], 'V');

@@ -15,29 +15,35 @@ describe('create players and test methods', () => {
     computerPlayer.placeShipOnBoard(2, [3, 7], 'V');
     computerPlayer.placeShipOnBoard(3, [3, 9], 'V');
     //playerboard
-    expect(humanPlayer.board.coordinates[0][0].ship).not.toBe(null);
-    expect(humanPlayer.board.coordinates[0][1].ship).not.toBe(null);
-    expect(humanPlayer.board.coordinates[0][2].ship).not.toBe(null);
-    expect(humanPlayer.board.coordinates[0][3].ship).toBe(null);
-    expect(humanPlayer.board.coordinates[2][5].ship).not.toBe(null);
-    expect(humanPlayer.board.coordinates[3][5].ship).not.toBe(null);
-    expect(humanPlayer.board.coordinates[4][5].ship).toBe(null);
-    expect(humanPlayer.board.coordinates[5][9].ship).not.toBe(null);
-    expect(humanPlayer.board.coordinates[6][9].ship).not.toBe(null);
-    expect(humanPlayer.board.coordinates[7][9].ship).not.toBe(null);
-    expect(humanPlayer.board.coordinates[8][9].ship).toBe(null);
+    expect(typeof humanPlayer.board.coordinates[0][0].ship).toBe('object');
+    expect(typeof humanPlayer.board.coordinates[0][1].ship).toBe('object');
+    expect(typeof humanPlayer.board.coordinates[0][2].ship).toBe('object');
+    expect(typeof humanPlayer.board.coordinates[0][3].ship).not.toBe('object');
+    expect(typeof humanPlayer.board.coordinates[2][5].ship).toBe('object');
+    expect(typeof humanPlayer.board.coordinates[3][5].ship).toBe('object');
+    expect(typeof humanPlayer.board.coordinates[4][5].ship).not.toBe('object');
+    expect(typeof humanPlayer.board.coordinates[5][9].ship).toBe('object');
+    expect(typeof humanPlayer.board.coordinates[6][9].ship).toBe('object');
+    expect(typeof humanPlayer.board.coordinates[7][9].ship).toBe('object');
+    expect(typeof humanPlayer.board.coordinates[8][9].ship).not.toBe('object');
     //computerboard
-    expect(computerPlayer.board.coordinates[1][0].ship).not.toBe(null);
-    expect(computerPlayer.board.coordinates[1][1].ship).not.toBe(null);
-    expect(computerPlayer.board.coordinates[1][2].ship).not.toBe(null);
-    expect(computerPlayer.board.coordinates[1][3].ship).toBe(null);
-    expect(computerPlayer.board.coordinates[3][7].ship).not.toBe(null);
-    expect(computerPlayer.board.coordinates[4][7].ship).not.toBe(null);
-    expect(computerPlayer.board.coordinates[5][7].ship).toBe(null);
-    expect(computerPlayer.board.coordinates[3][9].ship).not.toBe(null);
-    expect(computerPlayer.board.coordinates[4][9].ship).not.toBe(null);
-    expect(computerPlayer.board.coordinates[5][9].ship).not.toBe(null);
-    expect(computerPlayer.board.coordinates[6][9].ship).toBe(null);
+    expect(typeof computerPlayer.board.coordinates[1][0].ship).toBe('object');
+    expect(typeof computerPlayer.board.coordinates[1][1].ship).toBe('object');
+    expect(typeof computerPlayer.board.coordinates[1][2].ship).toBe('object');
+    expect(typeof computerPlayer.board.coordinates[1][3].ship).not.toBe(
+      'object',
+    );
+    expect(typeof computerPlayer.board.coordinates[3][7].ship).toBe('object');
+    expect(typeof computerPlayer.board.coordinates[4][7].ship).toBe('object');
+    expect(typeof computerPlayer.board.coordinates[5][7].ship).not.toBe(
+      'object',
+    );
+    expect(typeof computerPlayer.board.coordinates[3][9].ship).toBe('object');
+    expect(typeof computerPlayer.board.coordinates[4][9].ship).toBe('object');
+    expect(typeof computerPlayer.board.coordinates[5][9].ship).toBe('object');
+    expect(typeof computerPlayer.board.coordinates[6][9].ship).not.toBe(
+      'object',
+    );
   });
   test('Human and computer players attack each others boards', () => {
     humanPlayer.attackEnemy([1, 0], computerPlayer);

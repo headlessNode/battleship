@@ -24,7 +24,7 @@ describe('test gameBoard methods', () => {
   test('place ship at specific coordinates with vertical orientation', () => {
     const shipLength = 4;
     const shipOrientation = 'V';
-    const shipPosition = [2, 3];
+    const shipPosition = [2, 2];
     boardOne.placeShip(shipLength, shipPosition, shipOrientation);
     const positionRow = shipPosition[0];
     const positionCol = shipPosition[1];
@@ -64,9 +64,9 @@ describe('test gameBoard methods', () => {
     expect(boardOne.coordinates[5][8].ship).not.toBe(null);
   });
   test('gameboard recieves an attack on a coordinate without a ship', () => {
-    boardOne.receiveAttack([6, 7]);
-    expect(boardOne.coordinates[6][7].isHit).toBe(true);
-    expect(boardOne.coordinates[6][7].ship).toBe(null);
+    boardOne.receiveAttack([9, 0]);
+    expect(boardOne.coordinates[9][0].ship).toBe(null);
+    expect(boardOne.coordinates[9][0].isHit).toBe(true);
   });
   test('ship is hit times equal to its length, all isSunk properties corresponding to that ship coordinates must be true', () => {
     const shipLength = 4;
@@ -81,27 +81,22 @@ describe('test gameBoard methods', () => {
     expect(boardOne.coordinates[1][0].ship).not.toBe(null);
     expect(boardOne.coordinates[2][0].ship).not.toBe(null);
     expect(boardOne.coordinates[3][0].ship).not.toBe(null);
-    expect(boardOne.coordinates[0][0].isSunk).toBe(true);
-    expect(boardOne.coordinates[1][0].isSunk).toBe(true);
-    expect(boardOne.coordinates[2][0].isSunk).toBe(true);
-    expect(boardOne.coordinates[3][0].isSunk).toBe(true);
+    expect(boardOne.coordinates[0][0].ship.isSunk()).toBe(true);
+    expect(boardOne.coordinates[1][0].ship.isSunk()).toBe(true);
+    expect(boardOne.coordinates[2][0].ship.isSunk()).toBe(true);
+    expect(boardOne.coordinates[3][0].ship.isSunk()).toBe(true);
   });
   describe('test for gameboard method allShipsSunk', () => {
     test('all ships are sunk', () => {
       const boardTwo = new Gameboard();
-      boardTwo.placeShip(3, [0, 0], 'V');
-      boardTwo.placeShip(4, [0, 1], 'H');
-      boardTwo.placeShip(2, [4, 5], 'V');
+      boardTwo.placeShip(1, [0, 0], 'V');
+      boardTwo.placeShip(1, [0, 9], 'H');
+      boardTwo.placeShip(1, [9, 0], 'V');
       boardTwo.placeShip(1, [9, 9], 'H');
       boardTwo.receiveAttack([0, 0]);
-      boardTwo.receiveAttack([1, 0]);
+      boardTwo.receiveAttack([0, 9]);
       boardTwo.receiveAttack([2, 0]);
-      boardTwo.receiveAttack([0, 1]);
-      boardTwo.receiveAttack([0, 2]);
-      boardTwo.receiveAttack([0, 3]);
-      boardTwo.receiveAttack([0, 4]);
-      boardTwo.receiveAttack([4, 5]);
-      boardTwo.receiveAttack([5, 5]);
+      boardTwo.receiveAttack([9, 0]);
       boardTwo.receiveAttack([9, 9]);
 
       expect(boardTwo.allShipsSunk()).toBe(true);
@@ -109,21 +104,40 @@ describe('test gameBoard methods', () => {
     test('some ships are sunk', () => {
       const boardThree = new Gameboard();
       boardThree.placeShip(3, [0, 0], 'V');
-      boardThree.placeShip(4, [0, 1], 'H');
+      boardThree.placeShip(4, [0, 2], 'H');
       boardThree.placeShip(2, [4, 5], 'V');
       boardThree.placeShip(1, [9, 9], 'H');
       boardThree.receiveAttack([0, 0]);
       boardThree.receiveAttack([1, 0]);
       boardThree.receiveAttack([2, 0]);
-      boardThree.receiveAttack([1, 0]);
-      boardThree.receiveAttack([1, 1]);
-      boardThree.receiveAttack([1, 2]);
-      boardThree.receiveAttack([1, 3]);
+      boardThree.receiveAttack([0, 2]);
+      boardThree.receiveAttack([0, 3]);
+      boardThree.receiveAttack([0, 4]);
+      boardThree.receiveAttack([0, 5]);
       boardThree.receiveAttack([4, 5]);
       boardThree.receiveAttack([5, 5]);
-      boardThree.receiveAttack([9, 9]);
-
+      expect(typeof boardThree.coordinates[9][9].ship).toBe('object');
+      expect(boardThree.coordinates[9][9].isSunk).toBe(false);
       expect(boardThree.allShipsSunk()).toBe(false);
     });
+  });
+  test('placing ships adjacent to each other results in error', () => {
+    const boardFour = new Gameboard();
+    boardFour.placeShip(3, [0, 0], 'V');
+    expect(() => {
+      boardFour.placeShip(1, [0, 1], 'V');
+    }).toThrowError('Invalid position: Already contains a ship');
+    expect(() => {
+      boardFour.placeShip(1, [1, 1], 'V');
+    }).toThrowError('Invalid position: Already contains a ship');
+    expect(() => {
+      boardFour.placeShip(1, [2, 1], 'V');
+    }).toThrowError('Invalid position: Already contains a ship');
+    expect(() => {
+      boardFour.placeShip(1, [3, 1], 'V');
+    }).toThrowError('Invalid position: Already contains a ship');
+    expect(() => {
+      boardFour.placeShip(1, [3, 0], 'V');
+    }).toThrowError('Invalid position: Already contains a ship');
   });
 });
