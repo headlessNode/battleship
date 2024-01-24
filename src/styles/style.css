@@ -43,6 +43,16 @@ body{
     width: 2rem;
 }
 
+.board-two .row .block{
+    border: 1px solid #b4b4ff;
+}
+
+.board-two .row .block:hover{
+    cursor: pointer;
+    border: 2px solid #58355E;
+    background: rgba(0,0,255,.05);
+}
+
 .footer{
     border: 1px solid black;
     width: 100%;

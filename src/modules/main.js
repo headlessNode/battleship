@@ -1,152 +1,28 @@
 import '../styles/style.css';
 import Gameboard from './gameBoard.js';
 import Player from './player.js';
+import {
+  renderHumanBoard,
+  renderAiBoard,
+  updateAiBoard,
+  updateHumanBoard,
+} from './dom.js';
 
 function getPlayerName() {
   return prompt('Enter your name:');
 }
 
-function renderGameBoards(humanBoard, aiBoard) {
-  const boardOne = document.querySelector('.board-one');
-  const boardTwo = document.querySelector('.board-two');
-  //create board for humanPlayer
-  for (let i = 0; i <= 9; i++) {
-    const row = document.createElement('div');
-    row.classList.add('row');
-    boardOne.appendChild(row);
-    for (let j = 0; j <= 9; j++) {
-      const block = document.createElement('div');
-      block.classList.add('block');
-      block.dataset.xIndex = j;
-      block.dataset.yIndex = i;
-      if (
-        //for ship with vertical orientation
-        humanBoard.coordinates[i][j].ship !== null &&
-        humanBoard.coordinates[i][j].ship !== 'x' &&
-        humanBoard.coordinates[i][j].ship.orientation === 'V'
-      ) {
-        block.classList.add('ship-present');
-        block.style.border = '2px solid #00f';
-        block.style.background = 'rgba(0,0,255,.05)';
-        //if there is a ship-part below
-        if (
-          i + 1 <= 9 &&
-          humanBoard.coordinates[i + 1][j].ship !== null &&
-          humanBoard.coordinates[i + 1][j].ship !== 'x'
-        ) {
-          block.style.borderBottom = 'none';
-          block.style.borderBottom = '1px solid #b4b4ff';
-        }
-        //if there is a ship-part above
-        if (
-          i - 1 >= 0 &&
-          humanBoard.coordinates[i - 1][j].ship !== null &&
-          humanBoard.coordinates[i - 1][j].ship !== 'x'
-        ) {
-          block.style.borderTop = 'none';
-          block.style.borderTop = '1px solid #b4b4ff';
-        }
-        //for ship with horizontal orientation
-      } else if (
-        humanBoard.coordinates[i][j].ship !== null &&
-        humanBoard.coordinates[i][j].ship !== 'x' &&
-        humanBoard.coordinates[i][j].ship.orientation === 'H'
-      ) {
-        block.classList.add('ship-present');
-        block.style.border = '2px solid #00f';
-        block.style.background = 'rgba(0,0,255,.05)';
-        //if there is a ship-part to the right
-        if (
-          j + 1 <= 9 &&
-          humanBoard.coordinates[i][j + 1].ship !== null &&
-          humanBoard.coordinates[i][j + 1].ship !== 'x'
-        ) {
-          block.style.borderRight = 'none';
-          block.style.borderRight = '1px solid #b4b4ff';
-        }
-        if (
-          j - 1 >= 0 &&
-          humanBoard.coordinates[i][j - 1].ship !== null &&
-          humanBoard.coordinates[i][j - 1].ship !== 'x'
-        ) {
-          block.style.borderLeft = 'none';
-          block.style.borderLeft = '1px solid #b4b4ff';
-        }
-      } else {
-        block.style.border = '1px solid #b4b4ff';
-      }
-      row.appendChild(block);
-    }
-  }
-  //create board for aiPlayer
-  for (let i = 0; i <= 9; i++) {
-    const row = document.createElement('div');
-    row.classList.add('row');
-    boardTwo.appendChild(row);
-    for (let j = 0; j <= 9; j++) {
-      const block = document.createElement('div');
-      block.classList.add('block');
-      block.dataset.xIndex = j;
-      block.dataset.yIndex = i;
-      if (
-        //for ship with vertical orientation
-        aiBoard.coordinates[i][j].ship !== null &&
-        aiBoard.coordinates[i][j].ship !== 'x' &&
-        aiBoard.coordinates[i][j].ship.orientation === 'V'
-      ) {
-        block.classList.add('ship-present');
-        block.style.border = '2px solid #00f';
-        block.style.background = 'rgba(0,0,255,.05)';
-        //if there is a ship-part below
-        if (
-          i + 1 <= 9 &&
-          aiBoard.coordinates[i + 1][j].ship !== null &&
-          aiBoard.coordinates[i + 1][j].ship !== 'x'
-        ) {
-          block.style.borderBottom = 'none';
-          block.style.borderBottom = '1px solid #b4b4ff';
-        }
-        //if there is a ship-part above
-        if (
-          i - 1 >= 0 &&
-          aiBoard.coordinates[i - 1][j].ship !== null &&
-          aiBoard.coordinates[i - 1][j].ship !== 'x'
-        ) {
-          block.style.borderTop = 'none';
-          block.style.borderTop = '1px solid #b4b4ff';
-        }
-        //for ship with horizontal orientation
-      } else if (
-        aiBoard.coordinates[i][j].ship !== null &&
-        aiBoard.coordinates[i][j].ship !== 'x' &&
-        aiBoard.coordinates[i][j].ship.orientation === 'H'
-      ) {
-        block.classList.add('ship-present');
-        block.style.border = '2px solid #00f';
-        block.style.background = 'rgba(0,0,255,.05)';
-        //if there is a ship-part to the right
-        if (
-          j + 1 <= 9 &&
-          aiBoard.coordinates[i][j + 1].ship !== null &&
-          aiBoard.coordinates[i][j + 1].ship !== 'x'
-        ) {
-          block.style.borderRight = 'none';
-          block.style.borderRight = '1px solid #b4b4ff';
-        }
-        if (
-          j - 1 >= 0 &&
-          aiBoard.coordinates[i][j - 1].ship !== null &&
-          aiBoard.coordinates[i][j - 1].ship !== 'x'
-        ) {
-          block.style.borderLeft = 'none';
-          block.style.borderLeft = '1px solid #b4b4ff';
-        }
-      } else {
-        block.style.border = '1px solid #b4b4ff';
-      }
-      row.appendChild(block);
-    }
-  }
+//get player name
+//wait for player to attack enemy
+//show the attack on enemy board
+//enemy turn
+//enemy attacks player board
+//show the attack on player board
+//loop until someone wins
+
+function gameLoop(humanPlayer, aiPlayer, attackedCoordinates) {
+  aiPlayer.board.receiveAttack(attackedCoordinates);
+  updateAiBoard(aiPlayer.board, attackedCoordinates);
 }
 
 const gameController = (() => {
@@ -180,5 +56,17 @@ const gameController = (() => {
   aiPlayer.placeShipOnBoard(3, [4, 5], 'V');
   aiPlayer.placeShipOnBoard(4, [9, 2], 'H');
   //render gameboards
-  renderGameBoards(humanPlayer.board, aiPlayer.board);
+  renderHumanBoard(humanPlayer.board);
+  renderAiBoard(aiPlayer.board);
+
+  //addeventlistener to enemyboard blocks
+  const enemyBoardBlocks = document.querySelectorAll('.board-two .row .block');
+  enemyBoardBlocks.forEach((value) => {
+    value.addEventListener('click', () => {
+      gameLoop(humanPlayer, aiPlayer, [
+        parseInt(value.dataset.yIndex),
+        parseInt(value.dataset.xIndex),
+      ]);
+    });
+  });
 })();
