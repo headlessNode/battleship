@@ -265,7 +265,7 @@ class Gameboard {
         ) {
           value.ship.hit();
           value.isHit = true;
-        } else if (value.isHit === false && value.ship === null) {
+        } else if (value.isHit === false) {
           value.isHit = true;
         }
       }

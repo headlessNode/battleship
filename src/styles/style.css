@@ -41,6 +41,10 @@ body{
 .board-one .row .block, .board-two .row .block{
     height: 2rem;
     width: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
 }
 
 .board-two .row .block{

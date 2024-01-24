@@ -100,5 +100,15 @@ export function renderAiBoard(aiBoard) {
 // }
 
 export function updateAiBoard(aiBoard, attackedIndex) {
-  console.log(aiBoard.coordinates[attackedIndex[0]][attackedIndex[1]]);
+  const yIndex = attackedIndex[0];
+  const xIndex = attackedIndex[1];
+  const board = document.querySelector('.board-two');
+  const attackedCell = board.querySelector(
+    `.block[data-x-index="${xIndex}"][data-y-index="${yIndex}"]`,
+  );
+  if (attackedCell.classList.contains('ship-present')) {
+    attackedCell.innerHTML = '&times';
+  } else {
+    attackedCell.innerHTML = '&#183';
+  }
 }

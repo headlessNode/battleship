@@ -117,7 +117,7 @@ describe('test gameBoard methods', () => {
       boardThree.receiveAttack([4, 5]);
       boardThree.receiveAttack([5, 5]);
       expect(typeof boardThree.coordinates[9][9].ship).toBe('object');
-      expect(boardThree.coordinates[9][9].isSunk).toBe(false);
+      expect(boardThree.coordinates[9][9].ship.isSunk()).toBe(false);
       expect(boardThree.allShipsSunk()).toBe(false);
     });
   });
