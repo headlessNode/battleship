@@ -85,8 +85,7 @@ export function renderAiBoard(aiBoard) {
       if (
         //for ship with vertical orientation
         aiBoard.coordinates[i][j].ship !== null &&
-        aiBoard.coordinates[i][j].ship !== 'x' &&
-        aiBoard.coordinates[i][j].ship.orientation === 'V'
+        aiBoard.coordinates[i][j].ship !== 'x'
       ) {
         block.classList.add('ship-present');
       }
