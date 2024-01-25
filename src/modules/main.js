@@ -36,7 +36,7 @@ const gameController = (() => {
   const humanPlayer = new Player(getPlayerName(), playerGameBoard);
   const aiPlayer = new Player('AI', computerGameBoard);
   //place ships
-  const shipSizes = [1, 1, 1, 1, 2, 2, 2, 3, 3, 4];
+  //shipSizes = [1, 1, 1, 1, 2, 2, 2, 3, 3, 4];
   humanPlayer.placeShipOnBoard(1, [0, 0], 'V');
   humanPlayer.placeShipOnBoard(1, [0, 9], 'V');
   humanPlayer.placeShipOnBoard(1, [9, 0], 'V');
@@ -68,7 +68,6 @@ const gameController = (() => {
 //addeventlistener to enemyboard blocks
 const enemyBoardBlocks = document.querySelectorAll('.board-two .row .block');
 export const clickHandler = (event) => {
-  console.log('event handler triggered');
   gameLoop(gameController.humanPlayer, gameController.aiPlayer, [
     parseInt(event.target.dataset.yIndex),
     parseInt(event.target.dataset.xIndex),
