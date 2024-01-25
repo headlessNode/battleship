@@ -50,11 +50,12 @@ body{
     border: 1px solid #b4b4ff;
 }
 
-.board-two .row .block:hover{
-    cursor: pointer;
+.board-two .row .block.hover:hover{
+    cursor: crosshair;
     border: 2px solid #58355E;
     background: rgba(0,0,255,.05);
 }
+
 
 .footer{
     border: 1px solid black;

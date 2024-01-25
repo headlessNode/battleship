@@ -80,6 +80,7 @@ export function renderAiBoard(aiBoard) {
     for (let j = 0; j <= 9; j++) {
       const block = document.createElement('div');
       block.classList.add('block');
+      block.classList.add('hover');
       block.dataset.xIndex = j;
       block.dataset.yIndex = i;
       if (
@@ -98,7 +99,6 @@ export function renderAiBoard(aiBoard) {
 // }
 
 //when there is a ship, add dots to position adjacent diagonally
-//border all the blocks which contains a ship that is sunk
 
 export function updateAiBoard(aiBoard, attackedIndex) {
   const yIndex = attackedIndex[0];
@@ -107,14 +107,100 @@ export function updateAiBoard(aiBoard, attackedIndex) {
   const attackedCell = board.querySelector(
     `.block[data-x-index="${xIndex}"][data-y-index="${yIndex}"]`,
   );
+  attackedCell.classList.remove('hover');
   if (attackedCell.classList.contains('ship-present')) {
     attackedCell.innerHTML =
       '<svg width = "30" height = "30" viewBox="0 0 24 24" data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line"><path d="M19 19 5 5m14 0L5 19" style="fill:none;stroke:red;stroke-linecap:round;stroke-linejoin:round;stroke-width:.9600000000000002"/></svg>';
+    //add dots to blocks diagonally adjacent to the block hit
+    //add 1 in row and col
+    if (yIndex + 1 <= 9 && xIndex + 1 <= 9) {
+      const diagonalCell = board.querySelector(
+        `.block[data-x-index="${xIndex + 1}"][data-y-index="${yIndex + 1}"]`,
+      );
+      diagonalCell.innerHTML = '&#183';
+      diagonalCell.style.fontSize = '2rem';
+      diagonalCell.style.background = '#f2f4f8';
+      diagonalCell.classList.remove('hover');
+    }
+    //add 1 in row subt 1 in col
+    if (yIndex + 1 <= 9 && xIndex - 1 >= 0) {
+      const diagonalCell = board.querySelector(
+        `.block[data-x-index="${xIndex - 1}"][data-y-index="${yIndex + 1}"]`,
+      );
+      diagonalCell.innerHTML = '&#183';
+      diagonalCell.style.fontSize = '2rem';
+      diagonalCell.style.background = '#f2f4f8';
+      diagonalCell.classList.remove('hover');
+    }
+    //sub 1 in row sub 1 in col
+    if (yIndex - 1 >= 0 && xIndex - 1 >= 0) {
+      const diagonalCell = board.querySelector(
+        `.block[data-x-index="${xIndex - 1}"][data-y-index="${yIndex - 1}"]`,
+      );
+      diagonalCell.innerHTML = '&#183';
+      diagonalCell.style.fontSize = '2rem';
+      diagonalCell.style.background = '#f2f4f8';
+      diagonalCell.classList.remove('hover');
+    }
+    //sub 1 in row add 1 in col
+    if (yIndex - 1 >= 0 && xIndex + 1 <= 9) {
+      const diagonalCell = board.querySelector(
+        `.block[data-x-index="${xIndex + 1}"][data-y-index="${yIndex - 1}"]`,
+      );
+      diagonalCell.innerHTML = '&#183';
+      diagonalCell.style.fontSize = '2rem';
+      diagonalCell.style.background = '#f2f4f8';
+      diagonalCell.classList.remove('hover');
+    }
+
+    //if the ship is sunk add borders to the whole lenght of the ship
     if (aiBoard.coordinates[yIndex][xIndex].ship.isSunk()) {
       if (aiBoard.coordinates[yIndex][xIndex].ship.orientation === 'H') {
         const startIndex =
           aiBoard.coordinates[yIndex][xIndex].ship.startPosition[1];
         const endIndex = aiBoard.coordinates[yIndex][xIndex].ship.endPosition;
+        //add dots to start - 1
+        if (startIndex - 1 >= 0) {
+          const dottedCellBefore = board.querySelector(
+            `.block[data-x-index="${startIndex - 1}"][data-y-index="${yIndex}"]`,
+          );
+          dottedCellBefore.innerHTML = '&#183';
+          dottedCellBefore.style.fontSize = '2rem';
+          dottedCellBefore.style.background = '#f2f4f8';
+          dottedCellBefore.classList.remove('hover');
+        }
+        //add dots to end + 1
+        if (endIndex + 1 <= 9) {
+          const dottedCellAfter = board.querySelector(
+            `.block[data-x-index="${endIndex + 1}"][data-y-index="${yIndex}"]`,
+          );
+          dottedCellAfter.innerHTML = '&#183';
+          dottedCellAfter.style.fontSize = '2rem';
+          dottedCellAfter.style.background = '#f2f4f8';
+          dottedCellAfter.classList.remove('hover');
+        }
+        //also add dots above and below if the ship is of length 1
+        if (aiBoard.coordinates[yIndex][xIndex].ship.length === 1) {
+          if (yIndex + 1 <= 9) {
+            const dottedCellAbove = board.querySelector(
+              `.block[data-x-index="${xIndex}"][data-y-index="${yIndex + 1}"]`,
+            );
+            dottedCellAbove.innerHTML = '&#183';
+            dottedCellAbove.style.fontSize = '2rem';
+            dottedCellAbove.style.background = '#f2f4f8';
+            dottedCellAbove.classList.remove('hover');
+          }
+          if (yIndex - 1 >= 0) {
+            const dottedCellBelow = board.querySelector(
+              `.block[data-x-index="${xIndex}"][data-y-index="${yIndex - 1}"]`,
+            );
+            dottedCellBelow.innerHTML = '&#183';
+            dottedCellBelow.style.fontSize = '2rem';
+            dottedCellBelow.style.background = '#f2f4f8';
+            dottedCellBelow.classList.remove('hover');
+          }
+        }
+
         for (let i = startIndex; i <= endIndex; i++) {
           const shipCell = board.querySelector(
             `.block[data-x-index="${i}"][data-y-index="${aiBoard.coordinates[yIndex][xIndex].ship.startPosition[0]}"]`,
@@ -131,6 +217,48 @@ export function updateAiBoard(aiBoard, attackedIndex) {
         const startIndex =
           aiBoard.coordinates[yIndex][xIndex].ship.startPosition[0];
         const endIndex = aiBoard.coordinates[yIndex][xIndex].ship.endPosition;
+        //add dots to start - 1
+        if (startIndex - 1 >= 0) {
+          const dottedCellBefore = board.querySelector(
+            `.block[data-x-index="${xIndex}"][data-y-index="${startIndex - 1}"]`,
+          );
+          dottedCellBefore.innerHTML = '&#183';
+          dottedCellBefore.style.fontSize = '2rem';
+          dottedCellBefore.style.background = '#f2f4f8';
+          dottedCellBefore.classList.remove('hover');
+        }
+        //add dots to end + 1
+        if (endIndex + 1 <= 9) {
+          const dottedCellAfter = board.querySelector(
+            `.block[data-x-index="${xIndex}"][data-y-index="${endIndex + 1}"]`,
+          );
+          dottedCellAfter.innerHTML = '&#183';
+          dottedCellAfter.style.fontSize = '2rem';
+          dottedCellAfter.style.background = '#f2f4f8';
+          dottedCellAfter.classList.remove('hover');
+        }
+        //also add dots left and right if the ship is of length 1
+        if (aiBoard.coordinates[yIndex][xIndex].ship.length === 1) {
+          if (xIndex + 1 <= 9) {
+            const dottedCellRight = board.querySelector(
+              `.block[data-x-index="${xIndex + 1}"][data-y-index="${yIndex}"]`,
+            );
+            dottedCellRight.innerHTML = '&#183';
+            dottedCellRight.style.fontSize = '2rem';
+            dottedCellRight.style.background = '#f2f4f8';
+            dottedCellRight.classList.remove('hover');
+          }
+          if (xIndex - 1 >= 0) {
+            const dottedCellLeft = board.querySelector(
+              `.block[data-x-index="${xIndex - 1}"][data-y-index="${yIndex}"]`,
+            );
+            dottedCellLeft.innerHTML = '&#183';
+            dottedCellLeft.style.fontSize = '2rem';
+            dottedCellLeft.style.background = '#f2f4f8';
+            dottedCellLeft.classList.remove('hover');
+          }
+        }
+
         for (let i = startIndex; i <= endIndex; i++) {
           const shipCell = board.querySelector(
             `.block[data-x-index="${aiBoard.coordinates[yIndex][xIndex].ship.startPosition[1]}"][data-y-index="${i}"]`,
@@ -148,5 +276,6 @@ export function updateAiBoard(aiBoard, attackedIndex) {
   } else {
     attackedCell.innerHTML = '&#183';
     attackedCell.style.fontSize = '2rem';
+    attackedCell.style.background = '#f2f4f8';
   }
 }
