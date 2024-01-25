@@ -4,7 +4,7 @@ class Ship {
     this.#nHits = 0;
     this.length = length;
     this.orientation = orientation;
-    this.startPostion = null;
+    this.startPosition = null;
     this.endPosition = null;
   }
   hit() {

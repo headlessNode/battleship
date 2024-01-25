@@ -128,7 +128,7 @@ class Gameboard {
   //Gameboards should be able to place ships at specific coordinates by calling the ship factory function.
   placeShip(shipLength, position, shipOrientation) {
     const shipObject = new Ship(shipLength, shipOrientation);
-    shipObject.startPostion = position;
+    shipObject.startPosition = position;
     const positionRow = position[0];
     const positionCol = position[1];
     if (this.coordinates[positionRow][positionCol].ship === null) {
