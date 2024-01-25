@@ -62,14 +62,18 @@ const gameController = (() => {
   renderHumanBoard(humanPlayer.board);
   renderAiBoard(aiPlayer.board);
 
-  //addeventlistener to enemyboard blocks
-  const enemyBoardBlocks = document.querySelectorAll('.board-two .row .block');
-  enemyBoardBlocks.forEach((value) => {
-    value.addEventListener('click', () => {
-      gameLoop(humanPlayer, aiPlayer, [
-        parseInt(value.dataset.yIndex),
-        parseInt(value.dataset.xIndex),
-      ]);
-    });
-  });
+  return { humanPlayer, aiPlayer };
 })();
+
+//addeventlistener to enemyboard blocks
+const enemyBoardBlocks = document.querySelectorAll('.board-two .row .block');
+export const clickHandler = (event) => {
+  console.log('event handler triggered');
+  gameLoop(gameController.humanPlayer, gameController.aiPlayer, [
+    parseInt(event.target.dataset.yIndex),
+    parseInt(event.target.dataset.xIndex),
+  ]);
+};
+enemyBoardBlocks.forEach((value) => {
+  value.addEventListener('click', clickHandler);
+});
