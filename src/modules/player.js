@@ -12,5 +12,27 @@ class Player {
   attackEnemy(coordinates, enemyPlayer) {
     enemyPlayer.board.receiveAttack(coordinates);
   }
+  //method for generating random attack coordinates for AI
+  generateAttackCoordinates() {
+    let pairIsUnique = true;
+    let generatedPairs = [];
+    let yIndex;
+    let xIndex;
+
+    do {
+      yIndex = Math.floor(Math.random() * 10);
+      xIndex = Math.floor(Math.random() * 10);
+
+      pairIsUnique = !generatedPairs.some(
+        (value) => value[0] === yIndex && value[1] === xIndex,
+      );
+
+      if (pairIsUnique) {
+        generatedPairs.push([yIndex, xIndex]);
+      }
+    } while (pairIsUnique);
+
+    return [yIndex, xIndex];
+  }
 }
 export default Player;

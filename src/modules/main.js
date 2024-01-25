@@ -21,8 +21,11 @@ function getPlayerName() {
 //loop until someone wins
 
 function gameLoop(humanPlayer, aiPlayer, attackedCoordinates) {
-  aiPlayer.board.receiveAttack(attackedCoordinates);
+  humanPlayer.attackEnemy(attackedCoordinates, aiPlayer);
   updateAiBoard(aiPlayer.board, attackedCoordinates);
+  const aiAttackCoordinates = aiPlayer.generateAttackCoordinates();
+  aiPlayer.attackEnemy(aiAttackCoordinates, humanPlayer);
+  updateHumanBoard(humanPlayer.board, aiAttackCoordinates);
 }
 
 const gameController = (() => {

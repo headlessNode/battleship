@@ -71,4 +71,12 @@ describe('create players and test methods', () => {
     expect(humanPlayer.board.coordinates[3][7].isHit).toBe(true);
     expect(humanPlayer.board.coordinates[6][1].isHit).toBe(true);
   });
+  test('Generated attack coordinates for Ai player are unique', () => {
+    let generatedCoordinates = [];
+    for (let i = 0; i < 100; i++) {
+      const coordinates = computerPlayer.generateAttackCoordinates();
+      expect(generatedCoordinates).not.toContain(coordinates);
+      generatedCoordinates.push(coordinates);
+    }
+  });
 });
