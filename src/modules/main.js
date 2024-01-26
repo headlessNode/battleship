@@ -20,13 +20,31 @@ function getPlayerName() {
 //show the attack on player board
 //loop until someone wins
 
+function checkWinCondition(humanPlayer, aiPlayer) {
+  if (humanPlayer.board.allShipsSunk()) {
+    console.log(`${aiPlayer.name} Won the game.`);
+    const blocks = document.querySelectorAll('.board-two .block');
+    blocks.forEach((value) => {
+      value.removeEventListener('click', clickHandler);
+      value.classList.remove('hover');
+    });
+  } else if (aiPlayer.board.allShipsSunk()) {
+    console.log(`${humanPlayer.name} Won the game.`);
+    const blocks = document.querySelectorAll('.board-two .block');
+    blocks.forEach((value) => {
+      value.removeEventListener('click', clickHandler);
+      value.classList.remove('hover');
+    });
+  }
+}
+
 function gameLoop(humanPlayer, aiPlayer, attackedCoordinates) {
   humanPlayer.attackEnemy(attackedCoordinates, aiPlayer);
   updateAiBoard(aiPlayer.board, attackedCoordinates);
   const aiAttackCoordinates = aiPlayer.generateAttackCoordinates(humanPlayer);
-  console.log(aiAttackCoordinates);
   aiPlayer.attackEnemy(aiAttackCoordinates, humanPlayer);
   updateHumanBoard(humanPlayer.board, aiAttackCoordinates);
+  checkWinCondition(humanPlayer, aiPlayer);
 }
 
 const gameController = (() => {
