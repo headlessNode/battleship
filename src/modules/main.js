@@ -23,7 +23,8 @@ function getPlayerName() {
 function gameLoop(humanPlayer, aiPlayer, attackedCoordinates) {
   humanPlayer.attackEnemy(attackedCoordinates, aiPlayer);
   updateAiBoard(aiPlayer.board, attackedCoordinates);
-  const aiAttackCoordinates = aiPlayer.generateAttackCoordinates();
+  const aiAttackCoordinates = aiPlayer.generateAttackCoordinates(humanPlayer);
+  console.log(aiAttackCoordinates);
   aiPlayer.attackEnemy(aiAttackCoordinates, humanPlayer);
   updateHumanBoard(humanPlayer.board, aiAttackCoordinates);
 }

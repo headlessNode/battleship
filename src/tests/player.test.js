@@ -77,6 +77,7 @@ describe('create players and test methods', () => {
       const coordinates = computerPlayer.generateAttackCoordinates();
       expect(generatedCoordinates).not.toContain(coordinates);
       generatedCoordinates.push(coordinates);
+      expect(generatedCoordinates).toHaveLength(i + 1);
     }
   });
 });

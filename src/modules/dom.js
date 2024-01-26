@@ -115,6 +115,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
       diagonalCell.style.fontSize = '2rem';
       diagonalCell.style.background = '#f2f4f8';
       diagonalCell.classList.remove('hover');
+      humanBoard.coordinates[yIndex + 1][xIndex + 1].isHit = true;
     }
     //add 1 in row subt 1 in col
     if (yIndex + 1 <= 9 && xIndex - 1 >= 0) {
@@ -125,6 +126,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
       diagonalCell.style.fontSize = '2rem';
       diagonalCell.style.background = '#f2f4f8';
       diagonalCell.classList.remove('hover');
+      humanBoard.coordinates[yIndex + 1][xIndex - 1].isHit = true;
     }
     //sub 1 in row sub 1 in col
     if (yIndex - 1 >= 0 && xIndex - 1 >= 0) {
@@ -135,6 +137,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
       diagonalCell.style.fontSize = '2rem';
       diagonalCell.style.background = '#f2f4f8';
       diagonalCell.classList.remove('hover');
+      humanBoard.coordinates[yIndex - 1][xIndex - 1].isHit = true;
     }
     //sub 1 in row add 1 in col
     if (yIndex - 1 >= 0 && xIndex + 1 <= 9) {
@@ -145,6 +148,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
       diagonalCell.style.fontSize = '2rem';
       diagonalCell.style.background = '#f2f4f8';
       diagonalCell.classList.remove('hover');
+      humanBoard.coordinates[yIndex - 1][xIndex + 1].isHit = true;
     }
 
     //if the ship is sunk add borders to the whole lenght of the ship
@@ -163,6 +167,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
           dottedCellBefore.style.fontSize = '2rem';
           dottedCellBefore.style.background = '#f2f4f8';
           dottedCellBefore.classList.remove('hover');
+          humanBoard.coordinates[yIndex][startIndex - 1].isHit = true;
         }
         //add dots to end + 1
         if (endIndex + 1 <= 9) {
@@ -173,6 +178,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
           dottedCellAfter.style.fontSize = '2rem';
           dottedCellAfter.style.background = '#f2f4f8';
           dottedCellAfter.classList.remove('hover');
+          humanBoard.coordinates[yIndex][endIndex + 1].isHit = true;
         }
         //also add dots above and below if the ship is of length 1
         if (humanBoard.coordinates[yIndex][xIndex].ship.length === 1) {
@@ -184,6 +190,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
             dottedCellAbove.style.fontSize = '2rem';
             dottedCellAbove.style.background = '#f2f4f8';
             dottedCellAbove.classList.remove('hover');
+            humanBoard.coordinates[yIndex + 1][xIndex].isHit = true;
           }
           if (yIndex - 1 >= 0) {
             const dottedCellBelow = board.querySelector(
@@ -193,6 +200,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
             dottedCellBelow.style.fontSize = '2rem';
             dottedCellBelow.style.background = '#f2f4f8';
             dottedCellBelow.classList.remove('hover');
+            humanBoard.coordinates[yIndex - 1][xIndex].isHit = true;
           }
         }
 
@@ -222,6 +230,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
           dottedCellBefore.style.fontSize = '2rem';
           dottedCellBefore.style.background = '#f2f4f8';
           dottedCellBefore.classList.remove('hover');
+          humanBoard.coordinates[startIndex - 1][xIndex].isHit = true;
         }
         //add dots to end + 1
         if (endIndex + 1 <= 9) {
@@ -232,6 +241,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
           dottedCellAfter.style.fontSize = '2rem';
           dottedCellAfter.style.background = '#f2f4f8';
           dottedCellAfter.classList.remove('hover');
+          humanBoard.coordinates[endIndex + 1][xIndex].isHit = true;
         }
         //also add dots left and right if the ship is of length 1
         if (humanBoard.coordinates[yIndex][xIndex].ship.length === 1) {
@@ -243,6 +253,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
             dottedCellRight.style.fontSize = '2rem';
             dottedCellRight.style.background = '#f2f4f8';
             dottedCellRight.classList.remove('hover');
+            humanBoard.coordinates[yIndex][xIndex + 1].isHit = true;
           }
           if (xIndex - 1 >= 0) {
             const dottedCellLeft = board.querySelector(
@@ -252,6 +263,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
             dottedCellLeft.style.fontSize = '2rem';
             dottedCellLeft.style.background = '#f2f4f8';
             dottedCellLeft.classList.remove('hover');
+            humanBoard.coordinates[yIndex][xIndex - 1].isHit = true;
           }
         }
 
@@ -298,6 +310,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
       diagonalCell.style.background = '#f2f4f8';
       diagonalCell.classList.remove('hover');
       diagonalCell.removeEventListener('click', clickHandler);
+      aiBoard.coordinates[yIndex + 1][xIndex + 1].isHit = true;
     }
     //add 1 in row subt 1 in col
     if (yIndex + 1 <= 9 && xIndex - 1 >= 0) {
@@ -309,6 +322,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
       diagonalCell.style.background = '#f2f4f8';
       diagonalCell.classList.remove('hover');
       diagonalCell.removeEventListener('click', clickHandler);
+      aiBoard.coordinates[yIndex + 1][xIndex - 1].isHit = true;
     }
     //sub 1 in row sub 1 in col
     if (yIndex - 1 >= 0 && xIndex - 1 >= 0) {
@@ -320,6 +334,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
       diagonalCell.style.background = '#f2f4f8';
       diagonalCell.classList.remove('hover');
       diagonalCell.removeEventListener('click', clickHandler);
+      aiBoard.coordinates[yIndex - 1][xIndex - 1].isHit = true;
     }
     //sub 1 in row add 1 in col
     if (yIndex - 1 >= 0 && xIndex + 1 <= 9) {
@@ -331,6 +346,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
       diagonalCell.style.background = '#f2f4f8';
       diagonalCell.classList.remove('hover');
       diagonalCell.removeEventListener('click', clickHandler);
+      aiBoard.coordinates[yIndex - 1][xIndex + 1].isHit = true;
     }
 
     //if the ship is sunk add borders to the whole lenght of the ship
@@ -349,6 +365,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
           dottedCellBefore.style.background = '#f2f4f8';
           dottedCellBefore.classList.remove('hover');
           dottedCellBefore.removeEventListener('click', clickHandler);
+          aiBoard.coordinates[yIndex][startIndex - 1].isHit = true;
         }
         //add dots to end + 1
         if (endIndex + 1 <= 9) {
@@ -360,6 +377,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
           dottedCellAfter.style.background = '#f2f4f8';
           dottedCellAfter.classList.remove('hover');
           dottedCellAfter.removeEventListener('click', clickHandler);
+          aiBoard.coordinates[yIndex][endIndex + 1].isHit = true;
         }
         //also add dots above and below if the ship is of length 1
         if (aiBoard.coordinates[yIndex][xIndex].ship.length === 1) {
@@ -372,6 +390,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
             dottedCellAbove.style.background = '#f2f4f8';
             dottedCellAbove.classList.remove('hover');
             dottedCellAbove.removeEventListener('click', clickHandler);
+            aiBoard.coordinates[yIndex + 1][xIndex].isHit = true;
           }
           if (yIndex - 1 >= 0) {
             const dottedCellBelow = board.querySelector(
@@ -382,6 +401,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
             dottedCellBelow.style.background = '#f2f4f8';
             dottedCellBelow.classList.remove('hover');
             dottedCellBelow.removeEventListener('click', clickHandler);
+            aiBoard.coordinates[yIndex - 1][xIndex].isHit = true;
           }
         }
 
@@ -411,6 +431,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
           dottedCellBefore.style.background = '#f2f4f8';
           dottedCellBefore.classList.remove('hover');
           dottedCellBefore.removeEventListener('click', clickHandler);
+          aiBoard.coordinates[startIndex - 1][xIndex].isHit = true;
         }
         //add dots to end + 1
         if (endIndex + 1 <= 9) {
@@ -422,6 +443,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
           dottedCellAfter.style.background = '#f2f4f8';
           dottedCellAfter.classList.remove('hover');
           dottedCellAfter.removeEventListener('click', clickHandler);
+          aiBoard.coordinates[endIndex + 1][xIndex].isHit = true;
         }
         //also add dots left and right if the ship is of length 1
         if (aiBoard.coordinates[yIndex][xIndex].ship.length === 1) {
@@ -434,6 +456,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
             dottedCellRight.style.background = '#f2f4f8';
             dottedCellRight.classList.remove('hover');
             dottedCellRight.removeEventListener('click', clickHandler);
+            aiBoard.coordinates[yIndex][xIndex + 1].isHit = true;
           }
           if (xIndex - 1 >= 0) {
             const dottedCellLeft = board.querySelector(
@@ -444,6 +467,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
             dottedCellLeft.style.background = '#f2f4f8';
             dottedCellLeft.classList.remove('hover');
             dottedCellLeft.removeEventListener('click', clickHandler);
+            aiBoard.coordinates[yIndex][xIndex - 1].isHit = true;
           }
         }
 

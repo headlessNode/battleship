@@ -1,3 +1,4 @@
+let aiAttackCoordinates = [];
 class Player {
   constructor(name, board) {
     this.name = name;
@@ -13,24 +14,28 @@ class Player {
     enemyPlayer.board.receiveAttack(coordinates);
   }
   //method for generating random attack coordinates for AI
-  generateAttackCoordinates() {
-    let pairIsUnique = true;
-    let generatedPairs = [];
+  generateAttackCoordinates(enemyPlayer) {
+    let pairIsNotUnique = true;
     let yIndex;
     let xIndex;
-
     do {
       yIndex = Math.floor(Math.random() * 10);
       xIndex = Math.floor(Math.random() * 10);
 
-      pairIsUnique = !generatedPairs.some(
-        (value) => value[0] === yIndex && value[1] === xIndex,
+      pairIsNotUnique = aiAttackCoordinates.some(
+        (pair) => pair[0] === yIndex && pair[1] === xIndex,
       );
-
-      if (pairIsUnique) {
-        generatedPairs.push([yIndex, xIndex]);
+      if (enemyPlayer.board.coordinates[yIndex][xIndex].isHit) {
+        console.log(`alreadyHit: ${[yIndex, xIndex]}`);
       }
-    } while (pairIsUnique);
+      if (
+        !pairIsNotUnique &&
+        enemyPlayer.board.coordinates[yIndex][xIndex].isHit === false
+      ) {
+        aiAttackCoordinates.push([yIndex, xIndex]);
+        break;
+      }
+    } while (pairIsNotUnique);
 
     return [yIndex, xIndex];
   }
