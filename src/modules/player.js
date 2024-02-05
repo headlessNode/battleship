@@ -25,9 +25,6 @@ class Player {
       pairIsNotUnique = aiAttackCoordinates.some(
         (pair) => pair[0] === yIndex && pair[1] === xIndex,
       );
-      if (enemyPlayer.board.coordinates[yIndex][xIndex].isHit) {
-        console.log(`alreadyHit: ${[yIndex, xIndex]}`);
-      }
       if (
         !pairIsNotUnique &&
         enemyPlayer.board.coordinates[yIndex][xIndex].isHit === false
