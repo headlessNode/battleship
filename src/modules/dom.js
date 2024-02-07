@@ -1,7 +1,10 @@
 import { clickHandler } from './main.js';
 
 export function renderHumanBoard(humanBoard) {
-  const boardOne = document.querySelector('.board-one');
+  const boardOne = document.createElement('div');
+  boardOne.classList.add('board-one');
+  const pageBody = document.querySelector('.page-body');
+
   //create board for humanPlayer
   for (let i = 0; i <= 9; i++) {
     const row = document.createElement('div');
@@ -71,9 +74,13 @@ export function renderHumanBoard(humanBoard) {
       row.appendChild(block);
     }
   }
+  pageBody.appendChild(boardOne);
 }
 export function renderAiBoard(aiBoard) {
-  const boardTwo = document.querySelector('.board-two');
+  const boardTwo = document.createElement('div');
+  boardTwo.classList.add('board-two');
+  const pageBody = document.querySelector('.page-body');
+
   //create board for aiPlayer
   for (let i = 0; i <= 9; i++) {
     const row = document.createElement('div');
@@ -94,6 +101,7 @@ export function renderAiBoard(aiBoard) {
       row.appendChild(block);
     }
   }
+  pageBody.appendChild(boardTwo);
 }
 
 export function updateHumanBoard(humanBoard, attackedIndex) {

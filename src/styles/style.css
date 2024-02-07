@@ -28,17 +28,17 @@ body{
     grid-template-columns: 1fr 1fr;
 }
 
-.board-one, .board-two{
+.board-one, .board-two, .initial-board{
     margin-top: 4rem;
 }
 
-.board-one .row, .board-two .row{
+.board-one .row, .board-two .row, .initial-board .row{
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.board-one .row .block, .board-two .row .block{
+.board-one .row .block, .board-two .row .block, .initial-board .row .block{
     height: 2rem;
     width: 2rem;
     display: flex;
@@ -46,11 +46,11 @@ body{
     align-items: center;
 }
 
-.board-two .row .block{
+.board-two .row .block, .initial-board .row .block{
     border: 1px solid #b4b4ff;
 }
 
-.board-two .row .block.hover:hover{
+.board-two .row .block.hover:hover, .initial-board .row .block.hover:hover{
     cursor: crosshair;
     border: 2px solid #58355E;
     background: rgba(0,0,255,.05);

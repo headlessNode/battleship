@@ -135,118 +135,142 @@ class Gameboard {
       if (shipObject.orientation === 'H') {
         const shipEndpoint = positionCol + (shipObject.length - 1);
         shipObject.endPosition = shipEndpoint;
-        if (shipObject.endPosition <= 9) {
-          for (let i = 0; i < this.coordinates.length; i++) {
-            for (let j = 0; j < this.coordinates[i].length; j++) {
-              if (i === positionRow && j >= positionCol && j <= shipEndpoint) {
-                if (this.coordinates[i][j].ship === null) {
-                  this.coordinates[i][j].ship = shipObject;
-                } else {
-                  throw new Error('Invalid position: Already contains a ship');
+        if (
+          this.coordinates[positionRow][shipObject.endPosition].ship === null
+        ) {
+          if (shipObject.endPosition <= 9) {
+            for (let i = 0; i < this.coordinates.length; i++) {
+              for (let j = 0; j < this.coordinates[i].length; j++) {
+                if (
+                  i === positionRow &&
+                  j >= positionCol &&
+                  j <= shipEndpoint
+                ) {
+                  if (this.coordinates[i][j].ship === null) {
+                    this.coordinates[i][j].ship = shipObject;
+                  } else {
+                    throw new Error(
+                      'Invalid position: Already contains a ship',
+                    );
+                  }
                 }
               }
             }
-          }
-          let topAdjacentRow = positionRow - 1;
-          let topAdjacentCol = positionCol - 1;
-          let btmAdjacentRow = positionRow + 1;
-          let btmAdjacentCol = positionCol - 1;
-          if (
-            positionRow >= 0 &&
-            positionRow <= 9 &&
-            positionCol - 1 >= 0 &&
-            positionCol - 1 <= 9
-          ) {
-            this.coordinates[positionRow][positionCol - 1].ship = 'x';
-          }
-          if (
-            positionRow >= 0 &&
-            positionRow <= 9 &&
-            shipEndpoint + 1 >= 0 &&
-            shipEndpoint + 1 <= 9
-          ) {
-            this.coordinates[positionRow][shipEndpoint + 1].ship = 'x';
-          }
-          for (let i = 0; i <= shipObject.length - 1 + 2; i++) {
+            let topAdjacentRow = positionRow - 1;
+            let topAdjacentCol = positionCol - 1;
+            let btmAdjacentRow = positionRow + 1;
+            let btmAdjacentCol = positionCol - 1;
             if (
-              topAdjacentRow >= 0 &&
-              topAdjacentRow <= 9 &&
-              topAdjacentCol >= 0 &&
-              topAdjacentCol <= 9
+              positionRow >= 0 &&
+              positionRow <= 9 &&
+              positionCol - 1 >= 0 &&
+              positionCol - 1 <= 9
             ) {
-              this.coordinates[topAdjacentRow][topAdjacentCol].ship = 'x';
+              this.coordinates[positionRow][positionCol - 1].ship = 'x';
             }
             if (
-              btmAdjacentRow >= 0 &&
-              btmAdjacentRow <= 9 &&
-              btmAdjacentCol >= 0 &&
-              btmAdjacentCol <= 9
+              positionRow >= 0 &&
+              positionRow <= 9 &&
+              shipEndpoint + 1 >= 0 &&
+              shipEndpoint + 1 <= 9
             ) {
-              this.coordinates[btmAdjacentRow][btmAdjacentCol].ship = 'x';
+              this.coordinates[positionRow][shipEndpoint + 1].ship = 'x';
             }
-            topAdjacentCol++;
-            btmAdjacentCol++;
+            for (let i = 0; i <= shipObject.length - 1 + 2; i++) {
+              if (
+                topAdjacentRow >= 0 &&
+                topAdjacentRow <= 9 &&
+                topAdjacentCol >= 0 &&
+                topAdjacentCol <= 9
+              ) {
+                this.coordinates[topAdjacentRow][topAdjacentCol].ship = 'x';
+              }
+              if (
+                btmAdjacentRow >= 0 &&
+                btmAdjacentRow <= 9 &&
+                btmAdjacentCol >= 0 &&
+                btmAdjacentCol <= 9
+              ) {
+                this.coordinates[btmAdjacentRow][btmAdjacentCol].ship = 'x';
+              }
+              topAdjacentCol++;
+              btmAdjacentCol++;
+            }
+          } else {
+            throw new Error('Invalid Position: Out of bounds.');
           }
         } else {
-          throw new Error('Invalid Position: Out of bounds.');
+          throw new Error('Invalid position: Already contains a ship');
         }
       } else if (shipObject.orientation === 'V') {
         const shipEndpoint = positionRow + (shipObject.length - 1);
         shipObject.endPosition = shipEndpoint;
-        if (shipObject.endPosition <= 9) {
-          for (let i = 0; i < this.coordinates.length; i++) {
-            for (let j = 0; j < this.coordinates[i].length; j++) {
-              if (j === positionCol && i >= positionRow && i <= shipEndpoint) {
-                if (this.coordinates[i][j].ship === null) {
-                  this.coordinates[i][j].ship = shipObject;
-                } else {
-                  throw new Error('Invalid position: Already contains a ship');
+        if (
+          this.coordinates[shipObject.endPosition][positionCol].ship === null
+        ) {
+          if (shipObject.endPosition <= 9) {
+            for (let i = 0; i < this.coordinates.length; i++) {
+              for (let j = 0; j < this.coordinates[i].length; j++) {
+                if (
+                  j === positionCol &&
+                  i >= positionRow &&
+                  i <= shipEndpoint
+                ) {
+                  if (this.coordinates[i][j].ship === null) {
+                    this.coordinates[i][j].ship = shipObject;
+                  } else {
+                    throw new Error(
+                      'Invalid position: Already contains a ship',
+                    );
+                  }
                 }
               }
             }
-          }
-          let leftAdjacentRow = positionRow - 1;
-          let leftAdjacentCol = positionCol - 1;
-          let rightAdjacentRow = positionRow - 1;
-          let rightAdjacentCol = positionCol + 1;
-          if (
-            positionRow - 1 >= 0 &&
-            positionRow - 1 <= 9 &&
-            positionCol >= 0 &&
-            positionCol <= 9
-          ) {
-            this.coordinates[positionRow - 1][positionCol].ship = 'x';
-          }
-          if (
-            shipEndpoint + 1 >= 0 &&
-            shipEndpoint + 1 <= 9 &&
-            positionCol >= 0 &&
-            positionCol <= 9
-          ) {
-            this.coordinates[shipEndpoint + 1][positionCol].ship = 'x';
-          }
-          for (let i = 0; i <= shipObject.length - 1 + 2; i++) {
+            let leftAdjacentRow = positionRow - 1;
+            let leftAdjacentCol = positionCol - 1;
+            let rightAdjacentRow = positionRow - 1;
+            let rightAdjacentCol = positionCol + 1;
             if (
-              leftAdjacentRow >= 0 &&
-              leftAdjacentRow <= 9 &&
-              leftAdjacentCol >= 0 &&
-              leftAdjacentCol <= 9
+              positionRow - 1 >= 0 &&
+              positionRow - 1 <= 9 &&
+              positionCol >= 0 &&
+              positionCol <= 9
             ) {
-              this.coordinates[leftAdjacentRow][leftAdjacentCol].ship = 'x';
+              this.coordinates[positionRow - 1][positionCol].ship = 'x';
             }
             if (
-              rightAdjacentRow >= 0 &&
-              rightAdjacentRow <= 9 &&
-              rightAdjacentCol >= 0 &&
-              rightAdjacentCol <= 9
+              shipEndpoint + 1 >= 0 &&
+              shipEndpoint + 1 <= 9 &&
+              positionCol >= 0 &&
+              positionCol <= 9
             ) {
-              this.coordinates[rightAdjacentRow][rightAdjacentCol].ship = 'x';
+              this.coordinates[shipEndpoint + 1][positionCol].ship = 'x';
             }
-            leftAdjacentRow++;
-            rightAdjacentRow++;
+            for (let i = 0; i <= shipObject.length - 1 + 2; i++) {
+              if (
+                leftAdjacentRow >= 0 &&
+                leftAdjacentRow <= 9 &&
+                leftAdjacentCol >= 0 &&
+                leftAdjacentCol <= 9
+              ) {
+                this.coordinates[leftAdjacentRow][leftAdjacentCol].ship = 'x';
+              }
+              if (
+                rightAdjacentRow >= 0 &&
+                rightAdjacentRow <= 9 &&
+                rightAdjacentCol >= 0 &&
+                rightAdjacentCol <= 9
+              ) {
+                this.coordinates[rightAdjacentRow][rightAdjacentCol].ship = 'x';
+              }
+              leftAdjacentRow++;
+              rightAdjacentRow++;
+            }
+          } else {
+            throw new Error('Invalid Position: Out of bounds.');
           }
         } else {
-          throw new Error('Invalid Position: Out of bounds.');
+          throw new Error('Invalid position: Already contains a ship');
         }
       }
     } else {
