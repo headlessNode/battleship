@@ -43,13 +43,6 @@ function gameLoop(humanPlayer, aiPlayer, attackedCoordinates) {
   checkWinCondition(humanPlayer, aiPlayer);
 }
 
-export const clickHandler = (event, humanPlayer, aiPlayer) => {
-  gameLoop(humanPlayer, aiPlayer, [
-    parseInt(event.target.dataset.yIndex),
-    parseInt(event.target.dataset.xIndex),
-  ]);
-};
-
 function placeEnemyShips(aiPlayer) {
   aiPlayer.placeShipOnBoard(1, [0, 0], 'V');
   aiPlayer.placeShipOnBoard(1, [0, 9], 'V');
@@ -88,9 +81,17 @@ function placeHumanShips(humanPlayer) {
     let isHorizontal = true;
     let isVertical = false;
     //add a button for ship orientation
+    const btnContainer = document.createElement('div');
+    btnContainer.classList.add('btn-container');
+    const currentShip = document.createElement('div');
+    currentShip.classList.add('current-ship');
+    currentShip.textContent = 'Place your Scout';
     const button = document.createElement('button');
+    button.classList.add('orientation-btn');
     button.textContent = 'Horizontal';
-    pageBody.appendChild(button);
+    btnContainer.appendChild(currentShip);
+    btnContainer.appendChild(button);
+    pageBody.appendChild(btnContainer);
 
     button.addEventListener('click', () => {
       if (isHorizontal && !isVertical) {
@@ -163,35 +164,42 @@ function placeHumanShips(humanPlayer) {
       }
     }
     function handleBlockClick(e) {
-      if (currentShipIndex < shipSizes.length) {
-        const blockClicked = e.target;
-        const xIndex = parseInt(blockClicked.dataset.xIndex);
-        const yIndex = parseInt(blockClicked.dataset.yIndex);
-        let orientation;
-        if (isHorizontal && !isVertical) {
-          orientation = 'H';
-        } else if (!isHorizontal && isVertical) {
-          orientation = 'V';
+      if (shipSizes[currentShipIndex + 1] === 1) {
+        currentShip.textContent = 'Place your Scout';
+      } else if (shipSizes[currentShipIndex + 1] === 2) {
+        currentShip.textContent = 'Place your Ketch';
+      } else if (shipSizes[currentShipIndex + 1] === 3) {
+        currentShip.textContent = 'Place your Brig';
+      } else if (shipSizes[currentShipIndex + 1] === 4) {
+        currentShip.textContent = 'Place your Man-of-War';
+      }
+      const blockClicked = e.target;
+      const xIndex = parseInt(blockClicked.dataset.xIndex);
+      const yIndex = parseInt(blockClicked.dataset.yIndex);
+      let orientation;
+      if (isHorizontal && !isVertical) {
+        orientation = 'H';
+      } else if (!isHorizontal && isVertical) {
+        orientation = 'V';
+      }
+      try {
+        humanPlayer.placeShipOnBoard(
+          shipSizes[currentShipIndex],
+          [yIndex, xIndex],
+          orientation,
+        );
+        updateInitialBoard();
+        currentShipIndex++;
+        if (currentShipIndex === shipSizes.length) {
+          resolve();
         }
-        try {
-          humanPlayer.placeShipOnBoard(
-            shipSizes[currentShipIndex],
-            [yIndex, xIndex],
-            orientation,
+      } catch (error) {
+        if (error.message === 'Invalid position: Already contains a ship') {
+          window.alert(
+            'Invalid Position: Already contains a ship or is immediately adjacent to a ship',
           );
-          updateInitialBoard();
-          currentShipIndex++;
-          if (currentShipIndex === shipSizes.length) {
-            resolve();
-          }
-        } catch (error) {
-          if (error.message === 'Invalid position: Already contains a ship') {
-            window.alert(
-              'Invalid Position: Already contains a ship or is immediately adjacent to a ship',
-            );
-          } else if (error.message === 'Invalid Position: Out of bounds.') {
-            window.alert('Invalid Position: Out of bounds');
-          }
+        } else if (error.message === 'Invalid Position: Out of bounds.') {
+          window.alert('Invalid Position: Out of bounds');
         }
       }
     }
@@ -203,32 +211,32 @@ function placeHumanShips(humanPlayer) {
   });
 }
 
-const initiallizePage = (() => {
-  //create gameboards
-  const playerGameBoard = new Gameboard();
-  const computerGameBoard = new Gameboard();
-  //create players
-  const humanPlayer = new Player('Human', playerGameBoard);
-  const aiPlayer = new Player('AI', computerGameBoard);
-  placeHumanShips(humanPlayer).then(() => {
-    //place enemy ships
-    placeEnemyShips(aiPlayer);
-    //clear the pageBody
-    const pageBody = document.querySelector('.page-body');
-    while (pageBody.firstChild) {
-      pageBody.removeChild(pageBody.firstChild);
-    }
-    //render gameboards
-    renderHumanBoard(humanPlayer.board);
-    renderAiBoard(aiPlayer.board);
-    //addeventlistener to enemyboard blocks
-    const enemyBoardBlocks = document.querySelectorAll(
-      '.board-two .row .block',
-    );
-    enemyBoardBlocks.forEach((value) => {
-      value.addEventListener('click', (e) => {
-        clickHandler(e, humanPlayer, aiPlayer);
-      });
-    });
+//create gameboards
+const playerGameBoard = new Gameboard();
+const computerGameBoard = new Gameboard();
+//create players
+const humanPlayer = new Player('Human', playerGameBoard);
+const aiPlayer = new Player('AI', computerGameBoard);
+export const clickHandler = (event) => {
+  gameLoop(humanPlayer, aiPlayer, [
+    parseInt(event.target.dataset.yIndex),
+    parseInt(event.target.dataset.xIndex),
+  ]);
+};
+placeHumanShips(humanPlayer).then(() => {
+  //place enemy ships
+  placeEnemyShips(aiPlayer);
+  //clear the pageBody
+  const pageBody = document.querySelector('.page-body');
+  while (pageBody.firstChild) {
+    pageBody.removeChild(pageBody.firstChild);
+  }
+  //render gameboards
+  renderHumanBoard(humanPlayer.board);
+  renderAiBoard(aiPlayer.board);
+  //addeventlistener to enemyboard blocks
+  const enemyBoardBlocks = document.querySelectorAll('.board-two .row .block');
+  enemyBoardBlocks.forEach((value) => {
+    value.addEventListener('click', clickHandler);
   });
-})();
+});
