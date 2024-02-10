@@ -80,12 +80,38 @@ function placeHumanShips(humanPlayer) {
     let currentShipIndex = 0;
     let isHorizontal = true;
     let isVertical = false;
+    //ships
+    const scout = document.createElement('div');
+    scout.classList.add('scout');
+    scout.style.width = '32px';
+    scout.style.height = '32px';
+    scout.style.border = '2px solid #00f';
+    scout.style.background = 'rgba(0,0,255,.05)';
+    const frigate = document.createElement('div');
+    frigate.classList.add('frigate');
+    frigate.style.width = '64px';
+    frigate.style.height = '32px';
+    frigate.style.border = '2px solid #00f';
+    frigate.style.background = 'rgba(0,0,255,.05)';
+    const brig = document.createElement('div');
+    brig.classList.add('brig');
+    brig.style.width = '96px';
+    brig.style.height = '32px';
+    brig.style.border = '2px solid #00f';
+    brig.style.background = 'rgba(0,0,255,.05)';
+    const mowar = document.createElement('div');
+    mowar.classList.add('mowar');
+    mowar.style.width = '128px';
+    mowar.style.height = '32px';
+    mowar.style.border = '2px solid #00f';
+    mowar.style.background = 'rgba(0,0,255,.05)';
     //add a button for ship orientation
     const btnContainer = document.createElement('div');
     btnContainer.classList.add('btn-container');
     const currentShip = document.createElement('div');
     currentShip.classList.add('current-ship');
     currentShip.textContent = 'Place your Scout';
+    currentShip.appendChild(scout);
     const button = document.createElement('button');
     button.classList.add('orientation-btn');
     button.textContent = 'Horizontal';
@@ -165,13 +191,36 @@ function placeHumanShips(humanPlayer) {
     }
     function handleBlockClick(e) {
       if (shipSizes[currentShipIndex + 1] === 1) {
+        currentShip.removeChild(scout);
         currentShip.textContent = 'Place your Scout';
+        currentShip.appendChild(scout);
       } else if (shipSizes[currentShipIndex + 1] === 2) {
-        currentShip.textContent = 'Place your Ketch';
+        if (scout === currentShip.lastChild) {
+          currentShip.removeChild(scout);
+        }
+        if (frigate === currentShip.lastChild) {
+          currentShip.removeChild(frigate);
+        }
+        currentShip.textContent = 'Place your Frigate';
+        currentShip.appendChild(frigate);
       } else if (shipSizes[currentShipIndex + 1] === 3) {
+        if (frigate === currentShip.lastChild) {
+          currentShip.removeChild(frigate);
+        }
+        if (brig === currentShip.lastChild) {
+          currentShip.removeChild(brig);
+        }
         currentShip.textContent = 'Place your Brig';
+        currentShip.appendChild(brig);
       } else if (shipSizes[currentShipIndex + 1] === 4) {
+        if (brig === currentShip.lastChild) {
+          currentShip.removeChild(brig);
+        }
+        if (mowar === currentShip.lastChild) {
+          currentShip.removeChild(mowar);
+        }
         currentShip.textContent = 'Place your Man-of-War';
+        currentShip.appendChild(mowar);
       }
       const blockClicked = e.target;
       const xIndex = parseInt(blockClicked.dataset.xIndex);
