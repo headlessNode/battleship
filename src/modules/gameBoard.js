@@ -135,10 +135,10 @@ class Gameboard {
       if (shipObject.orientation === 'H') {
         const shipEndpoint = positionCol + (shipObject.length - 1);
         shipObject.endPosition = shipEndpoint;
-        if (
-          this.coordinates[positionRow][shipObject.endPosition].ship === null
-        ) {
-          if (shipObject.endPosition <= 9) {
+        if (shipObject.endPosition <= 9) {
+          if (
+            this.coordinates[positionRow][shipObject.endPosition].ship === null
+          ) {
             for (let i = 0; i < this.coordinates.length; i++) {
               for (let j = 0; j < this.coordinates[i].length; j++) {
                 if (
@@ -197,10 +197,10 @@ class Gameboard {
               btmAdjacentCol++;
             }
           } else {
-            throw new Error('Invalid Position: Out of bounds.');
+            throw new Error('Invalid position: Already contains a ship');
           }
         } else {
-          throw new Error('Invalid position: Already contains a ship');
+          throw new Error('Invalid Position: Out of bounds.');
         }
       } else if (shipObject.orientation === 'V') {
         const shipEndpoint = positionRow + (shipObject.length - 1);
