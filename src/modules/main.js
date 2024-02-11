@@ -17,26 +17,31 @@ import {
 //loop until someone wins
 
 function checkWinCondition(humanPlayer, aiPlayer) {
+  const endDialog = document.querySelector('.end-dialog');
+  const winner = document.querySelector('.end-dialog .winner');
   let gameEnd = false;
+
   const notification = document.querySelector('.notification');
   if (humanPlayer.board.allShipsSunk()) {
-    gameEnd = true;
+    winner.textContent = `${aiPlayer.name} won the game.`;
     notification.textContent = '';
-    console.log(`${aiPlayer.name} Won the game.`);
+    gameEnd = true;
     const blocks = document.querySelectorAll('.board-two .block');
     blocks.forEach((value) => {
       value.removeEventListener('click', clickHandler);
       value.classList.remove('hover');
     });
+    endDialog.showModal();
   } else if (aiPlayer.board.allShipsSunk()) {
+    winner.textContent = `You won the game.`;
     gameEnd = true;
     notification.textContent = '';
-    console.log(`${humanPlayer.name} Won the game.`);
     const blocks = document.querySelectorAll('.board-two .block');
     blocks.forEach((value) => {
       value.removeEventListener('click', clickHandler);
       value.classList.remove('hover');
     });
+    endDialog.showModal();
   }
   return gameEnd;
 }
@@ -56,6 +61,17 @@ function gameLoop(humanPlayer, aiPlayer, attackedCoordinates) {
         notification.textContent = 'Your turn';
       }
     }, 1000);
+  } else {
+    const endDialog = document.querySelector('.end-dialog');
+    const pageBody = document.querySelector('.page-body');
+    endDialog.addEventListener('submit', (e) => {
+      e.preventDefault();
+      endDialog.close();
+      while (pageBody.firstChild) {
+        pageBody.removeChild(pageBody.firstChild);
+      }
+      initializeGame();
+    });
   }
 }
 
@@ -292,38 +308,46 @@ function placeHumanShips(humanPlayer) {
   });
 }
 
-//create gameboards
-const playerGameBoard = new Gameboard();
-const computerGameBoard = new Gameboard();
-//create players
-const humanPlayer = new Player('Human', playerGameBoard);
-const aiPlayer = new Player('AI', computerGameBoard);
-export const clickHandler = (event) => {
-  gameLoop(humanPlayer, aiPlayer, [
-    parseInt(event.target.dataset.yIndex),
-    parseInt(event.target.dataset.xIndex),
-  ]);
-};
+export let clickHandler;
 
-placeHumanShips(humanPlayer).then(() => {
-  //place enemy ships
-  placeEnemyShips(aiPlayer);
-  //clear the pageBody
-  const pageBody = document.querySelector('.page-body');
-  while (pageBody.firstChild) {
-    pageBody.removeChild(pageBody.firstChild);
-  }
-  const boards = document.createElement('div');
-  boards.classList.add('boards');
-  pageBody.appendChild(boards);
-  //render gameboards
-  renderHumanBoard(humanPlayer.board);
-  renderAiBoard(aiPlayer.board);
-  //addeventlistener to enemyboard blocks
-  const notification = document.querySelector('.notification');
-  notification.textContent = 'Your turn';
-  const enemyBoardBlocks = document.querySelectorAll('.board-two .row .block');
-  enemyBoardBlocks.forEach((value) => {
-    value.addEventListener('click', clickHandler);
+function initializeGame() {
+  //create gameboards
+  const playerGameBoard = new Gameboard();
+  const computerGameBoard = new Gameboard();
+  //create players
+  const humanPlayer = new Player('Human', playerGameBoard);
+  const aiPlayer = new Player('AI', computerGameBoard);
+
+  placeHumanShips(humanPlayer).then(() => {
+    //place enemy ships
+    placeEnemyShips(aiPlayer);
+    //clear the pageBody
+    const pageBody = document.querySelector('.page-body');
+    while (pageBody.firstChild) {
+      pageBody.removeChild(pageBody.firstChild);
+    }
+    const boards = document.createElement('div');
+    boards.classList.add('boards');
+    pageBody.appendChild(boards);
+    //render gameboards
+    renderHumanBoard(humanPlayer.board);
+    renderAiBoard(aiPlayer.board);
+    //addeventlistener to enemyboard blocks
+    const notification = document.querySelector('.notification');
+    notification.textContent = 'Your turn';
+    const enemyBoardBlocks = document.querySelectorAll(
+      '.board-two .row .block',
+    );
+    clickHandler = (event) => {
+      gameLoop(humanPlayer, aiPlayer, [
+        parseInt(event.target.dataset.yIndex),
+        parseInt(event.target.dataset.xIndex),
+      ]);
+    };
+    enemyBoardBlocks.forEach((value) => {
+      value.addEventListener('click', clickHandler);
+    });
   });
-});
+}
+
+initializeGame();
