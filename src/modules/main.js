@@ -59,17 +59,33 @@ function gameLoop(humanPlayer, aiPlayer, attackedCoordinates) {
   }
 }
 
+function generateRandomCoordinates() {
+  const yIndex = Math.floor(Math.random() * 10);
+  const xIndex = Math.floor(Math.random() * 10);
+  return [yIndex, xIndex];
+}
+
 function placeEnemyShips(aiPlayer) {
-  aiPlayer.placeShipOnBoard(1, [0, 0], 'V');
-  aiPlayer.placeShipOnBoard(1, [0, 9], 'V');
-  aiPlayer.placeShipOnBoard(1, [9, 0], 'V');
-  aiPlayer.placeShipOnBoard(1, [9, 9], 'V');
-  aiPlayer.placeShipOnBoard(2, [1, 5], 'V');
-  aiPlayer.placeShipOnBoard(2, [6, 3], 'V');
-  aiPlayer.placeShipOnBoard(2, [3, 1], 'V');
-  aiPlayer.placeShipOnBoard(3, [4, 7], 'V');
-  aiPlayer.placeShipOnBoard(3, [4, 5], 'V');
-  aiPlayer.placeShipOnBoard(4, [9, 2], 'H');
+  const shipSizes = [1, 1, 1, 1, 2, 2, 2, 3, 3, 4];
+  const orientations = ['V', 'H'];
+
+  shipSizes.forEach((size) => {
+    let isPlacementValid = false;
+    let coordinates, orientation;
+
+    do {
+      coordinates = generateRandomCoordinates();
+      orientation =
+        orientations[Math.floor(Math.random() * orientations.length)];
+
+      try {
+        aiPlayer.placeShipOnBoard(size, coordinates, orientation);
+        isPlacementValid = true;
+      } catch (error) {
+        isPlacementValid = false;
+      }
+    } while (!isPlacementValid);
+  });
 }
 
 function placeHumanShips(humanPlayer) {
