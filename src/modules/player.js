@@ -57,7 +57,10 @@ export class Player {
           }
           aiAttackCoordinates.push([yIndex, xIndex]);
         }
-      } while (pairIsNotUnique);
+      } while (
+        pairIsNotUnique ||
+        enemyPlayer.board.coordinates[yIndex][xIndex].isHit
+      );
       return [yIndex, xIndex];
     }
     function filterTargetingList() {
@@ -109,7 +112,10 @@ export class Player {
       let coordinates = filterTargetingList();
       let yIndex = coordinates[0];
       let xIndex = coordinates[1];
-      if (xIndex === null && yIndex === null) {
+      if (
+        (xIndex === null && yIndex === null) ||
+        enemyPlayer.board.coordinates[yIndex][xIndex].isHit
+      ) {
         return randomCoordinatesGenerator();
       } else {
         return [yIndex, xIndex];

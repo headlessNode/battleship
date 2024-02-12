@@ -120,7 +120,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
       );
       diagonalCell.innerHTML = '&#183';
       diagonalCell.style.fontSize = '2rem';
-      diagonalCell.style.background = '#f2f4f8';
+      diagonalCell.style.background = '#CAD2E3';
       diagonalCell.classList.remove('hover');
       humanBoard.coordinates[yIndex + 1][xIndex + 1].isHit = true;
     }
@@ -131,7 +131,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
       );
       diagonalCell.innerHTML = '&#183';
       diagonalCell.style.fontSize = '2rem';
-      diagonalCell.style.background = '#f2f4f8';
+      diagonalCell.style.background = '#CAD2E3';
       diagonalCell.classList.remove('hover');
       humanBoard.coordinates[yIndex + 1][xIndex - 1].isHit = true;
     }
@@ -142,7 +142,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
       );
       diagonalCell.innerHTML = '&#183';
       diagonalCell.style.fontSize = '2rem';
-      diagonalCell.style.background = '#f2f4f8';
+      diagonalCell.style.background = '#CAD2E3';
       diagonalCell.classList.remove('hover');
       humanBoard.coordinates[yIndex - 1][xIndex - 1].isHit = true;
     }
@@ -153,7 +153,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
       );
       diagonalCell.innerHTML = '&#183';
       diagonalCell.style.fontSize = '2rem';
-      diagonalCell.style.background = '#f2f4f8';
+      diagonalCell.style.background = '#CAD2E3';
       diagonalCell.classList.remove('hover');
       humanBoard.coordinates[yIndex - 1][xIndex + 1].isHit = true;
     }
@@ -172,7 +172,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
           );
           dottedCellBefore.innerHTML = '&#183';
           dottedCellBefore.style.fontSize = '2rem';
-          dottedCellBefore.style.background = '#f2f4f8';
+          dottedCellBefore.style.background = '#CAD2E3';
           dottedCellBefore.classList.remove('hover');
           humanBoard.coordinates[yIndex][startIndex - 1].isHit = true;
         }
@@ -183,7 +183,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
           );
           dottedCellAfter.innerHTML = '&#183';
           dottedCellAfter.style.fontSize = '2rem';
-          dottedCellAfter.style.background = '#f2f4f8';
+          dottedCellAfter.style.background = '#CAD2E3';
           dottedCellAfter.classList.remove('hover');
           humanBoard.coordinates[yIndex][endIndex + 1].isHit = true;
         }
@@ -195,7 +195,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
             );
             dottedCellAbove.innerHTML = '&#183';
             dottedCellAbove.style.fontSize = '2rem';
-            dottedCellAbove.style.background = '#f2f4f8';
+            dottedCellAbove.style.background = '#CAD2E3';
             dottedCellAbove.classList.remove('hover');
             humanBoard.coordinates[yIndex + 1][xIndex].isHit = true;
           }
@@ -205,7 +205,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
             );
             dottedCellBelow.innerHTML = '&#183';
             dottedCellBelow.style.fontSize = '2rem';
-            dottedCellBelow.style.background = '#f2f4f8';
+            dottedCellBelow.style.background = '#CAD2E3';
             dottedCellBelow.classList.remove('hover');
             humanBoard.coordinates[yIndex - 1][xIndex].isHit = true;
           }
@@ -235,7 +235,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
           );
           dottedCellBefore.innerHTML = '&#183';
           dottedCellBefore.style.fontSize = '2rem';
-          dottedCellBefore.style.background = '#f2f4f8';
+          dottedCellBefore.style.background = '#CAD2E3';
           dottedCellBefore.classList.remove('hover');
           humanBoard.coordinates[startIndex - 1][xIndex].isHit = true;
         }
@@ -246,7 +246,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
           );
           dottedCellAfter.innerHTML = '&#183';
           dottedCellAfter.style.fontSize = '2rem';
-          dottedCellAfter.style.background = '#f2f4f8';
+          dottedCellAfter.style.background = '#CAD2E3';
           dottedCellAfter.classList.remove('hover');
           humanBoard.coordinates[endIndex + 1][xIndex].isHit = true;
         }
@@ -258,7 +258,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
             );
             dottedCellRight.innerHTML = '&#183';
             dottedCellRight.style.fontSize = '2rem';
-            dottedCellRight.style.background = '#f2f4f8';
+            dottedCellRight.style.background = '#CAD2E3';
             dottedCellRight.classList.remove('hover');
             humanBoard.coordinates[yIndex][xIndex + 1].isHit = true;
           }
@@ -268,7 +268,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
             );
             dottedCellLeft.innerHTML = '&#183';
             dottedCellLeft.style.fontSize = '2rem';
-            dottedCellLeft.style.background = '#f2f4f8';
+            dottedCellLeft.style.background = '#CAD2E3';
             dottedCellLeft.classList.remove('hover');
             humanBoard.coordinates[yIndex][xIndex - 1].isHit = true;
           }
@@ -291,7 +291,7 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
   } else {
     attackedCell.innerHTML = '&#183';
     attackedCell.style.fontSize = '2rem';
-    attackedCell.style.background = '#f2f4f8';
+    attackedCell.style.background = '#CAD2E3';
   }
 }
 
@@ -314,7 +314,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
       );
       diagonalCell.innerHTML = '&#183';
       diagonalCell.style.fontSize = '2rem';
-      diagonalCell.style.background = '#f2f4f8';
+      diagonalCell.style.background = '#CAD2E3';
       diagonalCell.classList.remove('hover');
       diagonalCell.removeEventListener('click', clickHandler);
       aiBoard.coordinates[yIndex + 1][xIndex + 1].isHit = true;
@@ -326,7 +326,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
       );
       diagonalCell.innerHTML = '&#183';
       diagonalCell.style.fontSize = '2rem';
-      diagonalCell.style.background = '#f2f4f8';
+      diagonalCell.style.background = '#CAD2E3';
       diagonalCell.classList.remove('hover');
       diagonalCell.removeEventListener('click', clickHandler);
       aiBoard.coordinates[yIndex + 1][xIndex - 1].isHit = true;
@@ -338,7 +338,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
       );
       diagonalCell.innerHTML = '&#183';
       diagonalCell.style.fontSize = '2rem';
-      diagonalCell.style.background = '#f2f4f8';
+      diagonalCell.style.background = '#CAD2E3';
       diagonalCell.classList.remove('hover');
       diagonalCell.removeEventListener('click', clickHandler);
       aiBoard.coordinates[yIndex - 1][xIndex - 1].isHit = true;
@@ -350,7 +350,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
       );
       diagonalCell.innerHTML = '&#183';
       diagonalCell.style.fontSize = '2rem';
-      diagonalCell.style.background = '#f2f4f8';
+      diagonalCell.style.background = '#CAD2E3';
       diagonalCell.classList.remove('hover');
       diagonalCell.removeEventListener('click', clickHandler);
       aiBoard.coordinates[yIndex - 1][xIndex + 1].isHit = true;
@@ -369,7 +369,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
           );
           dottedCellBefore.innerHTML = '&#183';
           dottedCellBefore.style.fontSize = '2rem';
-          dottedCellBefore.style.background = '#f2f4f8';
+          dottedCellBefore.style.background = '#CAD2E3';
           dottedCellBefore.classList.remove('hover');
           dottedCellBefore.removeEventListener('click', clickHandler);
           aiBoard.coordinates[yIndex][startIndex - 1].isHit = true;
@@ -381,7 +381,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
           );
           dottedCellAfter.innerHTML = '&#183';
           dottedCellAfter.style.fontSize = '2rem';
-          dottedCellAfter.style.background = '#f2f4f8';
+          dottedCellAfter.style.background = '#CAD2E3';
           dottedCellAfter.classList.remove('hover');
           dottedCellAfter.removeEventListener('click', clickHandler);
           aiBoard.coordinates[yIndex][endIndex + 1].isHit = true;
@@ -394,7 +394,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
             );
             dottedCellAbove.innerHTML = '&#183';
             dottedCellAbove.style.fontSize = '2rem';
-            dottedCellAbove.style.background = '#f2f4f8';
+            dottedCellAbove.style.background = '#CAD2E3';
             dottedCellAbove.classList.remove('hover');
             dottedCellAbove.removeEventListener('click', clickHandler);
             aiBoard.coordinates[yIndex + 1][xIndex].isHit = true;
@@ -405,7 +405,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
             );
             dottedCellBelow.innerHTML = '&#183';
             dottedCellBelow.style.fontSize = '2rem';
-            dottedCellBelow.style.background = '#f2f4f8';
+            dottedCellBelow.style.background = '#CAD2E3';
             dottedCellBelow.classList.remove('hover');
             dottedCellBelow.removeEventListener('click', clickHandler);
             aiBoard.coordinates[yIndex - 1][xIndex].isHit = true;
@@ -435,7 +435,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
           );
           dottedCellBefore.innerHTML = '&#183';
           dottedCellBefore.style.fontSize = '2rem';
-          dottedCellBefore.style.background = '#f2f4f8';
+          dottedCellBefore.style.background = '#CAD2E3';
           dottedCellBefore.classList.remove('hover');
           dottedCellBefore.removeEventListener('click', clickHandler);
           aiBoard.coordinates[startIndex - 1][xIndex].isHit = true;
@@ -447,7 +447,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
           );
           dottedCellAfter.innerHTML = '&#183';
           dottedCellAfter.style.fontSize = '2rem';
-          dottedCellAfter.style.background = '#f2f4f8';
+          dottedCellAfter.style.background = '#CAD2E3';
           dottedCellAfter.classList.remove('hover');
           dottedCellAfter.removeEventListener('click', clickHandler);
           aiBoard.coordinates[endIndex + 1][xIndex].isHit = true;
@@ -460,7 +460,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
             );
             dottedCellRight.innerHTML = '&#183';
             dottedCellRight.style.fontSize = '2rem';
-            dottedCellRight.style.background = '#f2f4f8';
+            dottedCellRight.style.background = '#CAD2E3';
             dottedCellRight.classList.remove('hover');
             dottedCellRight.removeEventListener('click', clickHandler);
             aiBoard.coordinates[yIndex][xIndex + 1].isHit = true;
@@ -471,7 +471,7 @@ export function updateAiBoard(aiBoard, attackedIndex) {
             );
             dottedCellLeft.innerHTML = '&#183';
             dottedCellLeft.style.fontSize = '2rem';
-            dottedCellLeft.style.background = '#f2f4f8';
+            dottedCellLeft.style.background = '#CAD2E3';
             dottedCellLeft.classList.remove('hover');
             dottedCellLeft.removeEventListener('click', clickHandler);
             aiBoard.coordinates[yIndex][xIndex - 1].isHit = true;
@@ -495,6 +495,6 @@ export function updateAiBoard(aiBoard, attackedIndex) {
   } else {
     attackedCell.innerHTML = '&#183';
     attackedCell.style.fontSize = '2rem';
-    attackedCell.style.background = '#f2f4f8';
+    attackedCell.style.background = '#CAD2E3';
   }
 }
