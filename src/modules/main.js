@@ -1,6 +1,6 @@
 import '../styles/style.css';
 import Gameboard from './gameBoard.js';
-import Player from './player.js';
+import { Player, resetGlobalVariables } from './player.js';
 import {
   renderHumanBoard,
   renderAiBoard,
@@ -47,31 +47,69 @@ function checkWinCondition(humanPlayer, aiPlayer) {
 }
 
 function gameLoop(humanPlayer, aiPlayer, attackedCoordinates) {
-  humanPlayer.attackEnemy(attackedCoordinates, aiPlayer);
+  const aiBoardAttackedCell = document.querySelector(
+    `.boards .board-two .block[data-x-index="${attackedCoordinates[1]}"][data-y-index="${attackedCoordinates[0]}"]`,
+  );
+  const endDialog = document.querySelector('.end-dialog');
+  const pageBody = document.querySelector('.page-body');
   const notification = document.querySelector('.notification');
-  notification.textContent = 'AI attacking. . .';
+  humanPlayer.attackEnemy(attackedCoordinates, aiPlayer);
   updateAiBoard(aiPlayer.board, attackedCoordinates);
-  if (!checkWinCondition(humanPlayer, aiPlayer)) {
+  if (aiBoardAttackedCell.classList.contains('ship-present')) {
+    notification.textContent = 'Your turn';
+    if (checkWinCondition(humanPlayer, aiPlayer)) {
+      endDialog.addEventListener('submit', (e) => {
+        e.preventDefault();
+        endDialog.close();
+        resetGlobalVariables();
+        while (pageBody.firstChild) {
+          pageBody.removeChild(pageBody.firstChild);
+        }
+        initializeGame();
+      });
+    }
+  } else {
+    notification.textContent = 'AI attacking. . .';
     setTimeout(() => {
       const aiAttackCoordinates =
         aiPlayer.generateAttackCoordinates(humanPlayer);
+      const humanBoardAttackedCell = document.querySelector(
+        `.boards .board-one .block[data-x-index="${aiAttackCoordinates[1]}"][data-y-index="${aiAttackCoordinates[0]}"]`,
+      );
       aiPlayer.attackEnemy(aiAttackCoordinates, humanPlayer);
       updateHumanBoard(humanPlayer.board, aiAttackCoordinates);
-      if (!checkWinCondition(humanPlayer, aiPlayer)) {
-        notification.textContent = 'Your turn';
+      let hitAnotherShip =
+        humanBoardAttackedCell.classList.contains('ship-present');
+      function consequentAttacks() {
+        return new Promise((resolve) => {
+          const interval = setInterval(() => {
+            if (!hitAnotherShip) {
+              clearInterval(interval);
+              resolve();
+            } else {
+              const extraTurnAttackCoordinates =
+                aiPlayer.generateAttackCoordinates(humanPlayer);
+              aiPlayer.attackEnemy(extraTurnAttackCoordinates, humanPlayer);
+              updateHumanBoard(humanPlayer.board, extraTurnAttackCoordinates);
+              hitAnotherShip = document
+                .querySelector(
+                  `.boards .board-one .block[data-x-index="${extraTurnAttackCoordinates[1]}"][data-y-index="${extraTurnAttackCoordinates[0]}"]`,
+                )
+                .classList.contains('ship-present');
+              if (!hitAnotherShip) {
+                clearInterval(interval);
+                resolve();
+              }
+            }
+          }, 1000);
+        });
       }
+      consequentAttacks().then(() => {
+        if (!checkWinCondition(humanPlayer, aiPlayer)) {
+          notification.textContent = 'Your turn';
+        }
+      });
     }, 1000);
-  } else {
-    const endDialog = document.querySelector('.end-dialog');
-    const pageBody = document.querySelector('.page-body');
-    endDialog.addEventListener('submit', (e) => {
-      e.preventDefault();
-      endDialog.close();
-      while (pageBody.firstChild) {
-        pageBody.removeChild(pageBody.firstChild);
-      }
-      initializeGame();
-    });
   }
 }
 
@@ -110,6 +148,8 @@ function placeHumanShips(humanPlayer) {
     initialBoard.classList.add('initial-board');
     const pageBody = document.querySelector('.page-body');
     pageBody.appendChild(initialBoard);
+    const notification = document.querySelector('.header .notification');
+    notification.textContent = 'Place your ships';
     //create the board
     for (let i = 0; i <= 9; i++) {
       const row = document.createElement('div');

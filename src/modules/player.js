@@ -1,6 +1,12 @@
 let aiAttackCoordinates = [];
 let targetingList = [];
-class Player {
+
+export function resetGlobalVariables() {
+  aiAttackCoordinates = [];
+  targetingList = [];
+}
+
+export class Player {
   constructor(name, board) {
     this.name = name;
     this.board = board;
@@ -111,4 +117,3 @@ class Player {
     }
   }
 }
-export default Player;
