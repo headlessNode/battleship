@@ -23,7 +23,7 @@ function checkWinCondition(humanPlayer, aiPlayer) {
 
   const notification = document.querySelector('.notification');
   if (humanPlayer.board.allShipsSunk()) {
-    winner.textContent = `${aiPlayer.name} won the game.`;
+    winner.textContent = `${aiPlayer.name} won the game`;
     notification.textContent = '';
     gameEnd = true;
     const blocks = document.querySelectorAll('.board-two .block');
@@ -32,8 +32,12 @@ function checkWinCondition(humanPlayer, aiPlayer) {
       value.classList.remove('hover');
     });
     endDialog.showModal();
+    endDialog.style.display = 'flex';
+    endDialog.style.flexDirection = 'column';
+    endDialog.style.justifyContent = 'center';
+    endDialog.style.alignItems = 'center';
   } else if (aiPlayer.board.allShipsSunk()) {
-    winner.textContent = `You won the game.`;
+    winner.textContent = `You won the game`;
     gameEnd = true;
     notification.textContent = '';
     const blocks = document.querySelectorAll('.board-two .block');
@@ -42,6 +46,10 @@ function checkWinCondition(humanPlayer, aiPlayer) {
       value.classList.remove('hover');
     });
     endDialog.showModal();
+    endDialog.style.display = 'flex';
+    endDialog.style.flexDirection = 'column';
+    endDialog.style.justifyContent = 'center';
+    endDialog.style.alignItems = 'center';
   }
   return gameEnd;
 }
@@ -61,6 +69,7 @@ function gameLoop(humanPlayer, aiPlayer, attackedCoordinates) {
       endDialog.addEventListener('submit', (e) => {
         e.preventDefault();
         endDialog.close();
+        endDialog.style.display = 'none';
         resetGlobalVariables();
         while (pageBody.firstChild) {
           pageBody.removeChild(pageBody.firstChild);
@@ -78,9 +87,7 @@ function gameLoop(humanPlayer, aiPlayer, attackedCoordinates) {
       );
       aiPlayer.attackEnemy(aiAttackCoordinates, humanPlayer);
       updateHumanBoard(humanPlayer.board, aiAttackCoordinates);
-      let hitAnotherShip =
-        humanBoardAttackedCell.classList.contains('ship-present');
-      function consequentAttacks() {
+      function consequentAttacks(hitAnotherShip) {
         return new Promise((resolve) => {
           const interval = setInterval(() => {
             if (!hitAnotherShip) {
@@ -101,15 +108,41 @@ function gameLoop(humanPlayer, aiPlayer, attackedCoordinates) {
                 resolve();
               }
             }
-          }, 1000);
+          }, 500);
         });
       }
-      consequentAttacks().then(() => {
-        if (!checkWinCondition(humanPlayer, aiPlayer)) {
-          notification.textContent = 'Your turn';
-        }
-      });
-    }, 1000);
+      if (checkWinCondition(humanPlayer, aiPlayer)) {
+        endDialog.addEventListener('submit', (e) => {
+          e.preventDefault();
+          endDialog.close();
+          endDialog.style.display = 'none';
+          resetGlobalVariables();
+          while (pageBody.firstChild) {
+            pageBody.removeChild(pageBody.firstChild);
+          }
+          initializeGame();
+        });
+      } else {
+        let hitAnotherShip =
+          humanBoardAttackedCell.classList.contains('ship-present');
+        consequentAttacks(hitAnotherShip).then(() => {
+          if (checkWinCondition(humanPlayer, aiPlayer)) {
+            endDialog.addEventListener('submit', (e) => {
+              e.preventDefault();
+              endDialog.close();
+              endDialog.style.display = 'none';
+              resetGlobalVariables();
+              while (pageBody.firstChild) {
+                pageBody.removeChild(pageBody.firstChild);
+              }
+              initializeGame();
+            });
+          } else {
+            notification.textContent = 'Your turn';
+          }
+        });
+      }
+    }, 800);
   }
 }
 

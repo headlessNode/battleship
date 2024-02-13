@@ -109,7 +109,6 @@
     background: rgba(0,0,255,.05);
 }
 
-
 .footer{
     height: 100%;
     display: flex;
@@ -125,4 +124,50 @@
 
 .footer a i:hover{
     transform: rotateZ(360deg) scale(1.5);
+}
+
+.end-dialog[open]{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.end-dialog{
+    margin: auto auto;
+    border: none;
+    border-radius: 10px;
+    width: 250px;
+    height: 150px;
+    transition: 
+        opacity 600ms ease-in-out,
+        transform 300ms ease-in-out;
+}
+
+@starting-style{
+    .end-dialog[open]{
+        opacity: 0;
+        transform: translateY(100px);
+    }
+}
+
+.end-dialog form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.end-dialog form button{
+    width: 120px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    background: #136290;
+    color: white;
+    font-size: large;
+    cursor: pointer;
+}
+
+.end-dialog form button:hover{
+    background: #1A87C7;
 }

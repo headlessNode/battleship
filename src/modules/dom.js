@@ -118,7 +118,8 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
       const diagonalCell = board.querySelector(
         `.block[data-x-index="${xIndex + 1}"][data-y-index="${yIndex + 1}"]`,
       );
-      diagonalCell.innerHTML = '&#183';
+      diagonalCell.innerHTML =
+        '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
       diagonalCell.style.fontSize = '2rem';
       diagonalCell.style.background = '#CAD2E3';
       diagonalCell.classList.remove('hover');
@@ -129,7 +130,8 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
       const diagonalCell = board.querySelector(
         `.block[data-x-index="${xIndex - 1}"][data-y-index="${yIndex + 1}"]`,
       );
-      diagonalCell.innerHTML = '&#183';
+      diagonalCell.innerHTML =
+        '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
       diagonalCell.style.fontSize = '2rem';
       diagonalCell.style.background = '#CAD2E3';
       diagonalCell.classList.remove('hover');
@@ -140,7 +142,8 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
       const diagonalCell = board.querySelector(
         `.block[data-x-index="${xIndex - 1}"][data-y-index="${yIndex - 1}"]`,
       );
-      diagonalCell.innerHTML = '&#183';
+      diagonalCell.innerHTML =
+        '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
       diagonalCell.style.fontSize = '2rem';
       diagonalCell.style.background = '#CAD2E3';
       diagonalCell.classList.remove('hover');
@@ -151,7 +154,8 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
       const diagonalCell = board.querySelector(
         `.block[data-x-index="${xIndex + 1}"][data-y-index="${yIndex - 1}"]`,
       );
-      diagonalCell.innerHTML = '&#183';
+      diagonalCell.innerHTML =
+        '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
       diagonalCell.style.fontSize = '2rem';
       diagonalCell.style.background = '#CAD2E3';
       diagonalCell.classList.remove('hover');
@@ -170,7 +174,8 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
           const dottedCellBefore = board.querySelector(
             `.block[data-x-index="${startIndex - 1}"][data-y-index="${yIndex}"]`,
           );
-          dottedCellBefore.innerHTML = '&#183';
+          dottedCellBefore.innerHTML =
+            '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
           dottedCellBefore.style.fontSize = '2rem';
           dottedCellBefore.style.background = '#CAD2E3';
           dottedCellBefore.classList.remove('hover');
@@ -181,7 +186,8 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
           const dottedCellAfter = board.querySelector(
             `.block[data-x-index="${endIndex + 1}"][data-y-index="${yIndex}"]`,
           );
-          dottedCellAfter.innerHTML = '&#183';
+          dottedCellAfter.innerHTML =
+            '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
           dottedCellAfter.style.fontSize = '2rem';
           dottedCellAfter.style.background = '#CAD2E3';
           dottedCellAfter.classList.remove('hover');
@@ -193,7 +199,8 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
             const dottedCellAbove = board.querySelector(
               `.block[data-x-index="${xIndex}"][data-y-index="${yIndex + 1}"]`,
             );
-            dottedCellAbove.innerHTML = '&#183';
+            dottedCellAbove.innerHTML =
+              '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
             dottedCellAbove.style.fontSize = '2rem';
             dottedCellAbove.style.background = '#CAD2E3';
             dottedCellAbove.classList.remove('hover');
@@ -203,7 +210,8 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
             const dottedCellBelow = board.querySelector(
               `.block[data-x-index="${xIndex}"][data-y-index="${yIndex - 1}"]`,
             );
-            dottedCellBelow.innerHTML = '&#183';
+            dottedCellBelow.innerHTML =
+              '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
             dottedCellBelow.style.fontSize = '2rem';
             dottedCellBelow.style.background = '#CAD2E3';
             dottedCellBelow.classList.remove('hover');
@@ -233,7 +241,8 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
           const dottedCellBefore = board.querySelector(
             `.block[data-x-index="${xIndex}"][data-y-index="${startIndex - 1}"]`,
           );
-          dottedCellBefore.innerHTML = '&#183';
+          dottedCellBefore.innerHTML =
+            '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
           dottedCellBefore.style.fontSize = '2rem';
           dottedCellBefore.style.background = '#CAD2E3';
           dottedCellBefore.classList.remove('hover');
@@ -244,7 +253,8 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
           const dottedCellAfter = board.querySelector(
             `.block[data-x-index="${xIndex}"][data-y-index="${endIndex + 1}"]`,
           );
-          dottedCellAfter.innerHTML = '&#183';
+          dottedCellAfter.innerHTML =
+            '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
           dottedCellAfter.style.fontSize = '2rem';
           dottedCellAfter.style.background = '#CAD2E3';
           dottedCellAfter.classList.remove('hover');
@@ -256,7 +266,8 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
             const dottedCellRight = board.querySelector(
               `.block[data-x-index="${xIndex + 1}"][data-y-index="${yIndex}"]`,
             );
-            dottedCellRight.innerHTML = '&#183';
+            dottedCellRight.innerHTML =
+              '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
             dottedCellRight.style.fontSize = '2rem';
             dottedCellRight.style.background = '#CAD2E3';
             dottedCellRight.classList.remove('hover');
@@ -266,7 +277,8 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
             const dottedCellLeft = board.querySelector(
               `.block[data-x-index="${xIndex - 1}"][data-y-index="${yIndex}"]`,
             );
-            dottedCellLeft.innerHTML = '&#183';
+            dottedCellLeft.innerHTML =
+              '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
             dottedCellLeft.style.fontSize = '2rem';
             dottedCellLeft.style.background = '#CAD2E3';
             dottedCellLeft.classList.remove('hover');
@@ -289,7 +301,8 @@ export function updateHumanBoard(humanBoard, attackedIndex) {
       }
     }
   } else {
-    attackedCell.innerHTML = '&#183';
+    attackedCell.innerHTML =
+      '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
     attackedCell.style.fontSize = '2rem';
     attackedCell.style.background = '#CAD2E3';
   }
@@ -312,7 +325,8 @@ export function updateAiBoard(aiBoard, attackedIndex) {
       const diagonalCell = board.querySelector(
         `.block[data-x-index="${xIndex + 1}"][data-y-index="${yIndex + 1}"]`,
       );
-      diagonalCell.innerHTML = '&#183';
+      diagonalCell.innerHTML =
+        '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
       diagonalCell.style.fontSize = '2rem';
       diagonalCell.style.background = '#CAD2E3';
       diagonalCell.classList.remove('hover');
@@ -324,7 +338,8 @@ export function updateAiBoard(aiBoard, attackedIndex) {
       const diagonalCell = board.querySelector(
         `.block[data-x-index="${xIndex - 1}"][data-y-index="${yIndex + 1}"]`,
       );
-      diagonalCell.innerHTML = '&#183';
+      diagonalCell.innerHTML =
+        '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
       diagonalCell.style.fontSize = '2rem';
       diagonalCell.style.background = '#CAD2E3';
       diagonalCell.classList.remove('hover');
@@ -336,7 +351,8 @@ export function updateAiBoard(aiBoard, attackedIndex) {
       const diagonalCell = board.querySelector(
         `.block[data-x-index="${xIndex - 1}"][data-y-index="${yIndex - 1}"]`,
       );
-      diagonalCell.innerHTML = '&#183';
+      diagonalCell.innerHTML =
+        '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
       diagonalCell.style.fontSize = '2rem';
       diagonalCell.style.background = '#CAD2E3';
       diagonalCell.classList.remove('hover');
@@ -348,7 +364,8 @@ export function updateAiBoard(aiBoard, attackedIndex) {
       const diagonalCell = board.querySelector(
         `.block[data-x-index="${xIndex + 1}"][data-y-index="${yIndex - 1}"]`,
       );
-      diagonalCell.innerHTML = '&#183';
+      diagonalCell.innerHTML =
+        '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
       diagonalCell.style.fontSize = '2rem';
       diagonalCell.style.background = '#CAD2E3';
       diagonalCell.classList.remove('hover');
@@ -367,7 +384,8 @@ export function updateAiBoard(aiBoard, attackedIndex) {
           const dottedCellBefore = board.querySelector(
             `.block[data-x-index="${startIndex - 1}"][data-y-index="${yIndex}"]`,
           );
-          dottedCellBefore.innerHTML = '&#183';
+          dottedCellBefore.innerHTML =
+            '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
           dottedCellBefore.style.fontSize = '2rem';
           dottedCellBefore.style.background = '#CAD2E3';
           dottedCellBefore.classList.remove('hover');
@@ -379,7 +397,8 @@ export function updateAiBoard(aiBoard, attackedIndex) {
           const dottedCellAfter = board.querySelector(
             `.block[data-x-index="${endIndex + 1}"][data-y-index="${yIndex}"]`,
           );
-          dottedCellAfter.innerHTML = '&#183';
+          dottedCellAfter.innerHTML =
+            '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
           dottedCellAfter.style.fontSize = '2rem';
           dottedCellAfter.style.background = '#CAD2E3';
           dottedCellAfter.classList.remove('hover');
@@ -392,7 +411,8 @@ export function updateAiBoard(aiBoard, attackedIndex) {
             const dottedCellAbove = board.querySelector(
               `.block[data-x-index="${xIndex}"][data-y-index="${yIndex + 1}"]`,
             );
-            dottedCellAbove.innerHTML = '&#183';
+            dottedCellAbove.innerHTML =
+              '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
             dottedCellAbove.style.fontSize = '2rem';
             dottedCellAbove.style.background = '#CAD2E3';
             dottedCellAbove.classList.remove('hover');
@@ -403,7 +423,8 @@ export function updateAiBoard(aiBoard, attackedIndex) {
             const dottedCellBelow = board.querySelector(
               `.block[data-x-index="${xIndex}"][data-y-index="${yIndex - 1}"]`,
             );
-            dottedCellBelow.innerHTML = '&#183';
+            dottedCellBelow.innerHTML =
+              '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
             dottedCellBelow.style.fontSize = '2rem';
             dottedCellBelow.style.background = '#CAD2E3';
             dottedCellBelow.classList.remove('hover');
@@ -433,7 +454,8 @@ export function updateAiBoard(aiBoard, attackedIndex) {
           const dottedCellBefore = board.querySelector(
             `.block[data-x-index="${xIndex}"][data-y-index="${startIndex - 1}"]`,
           );
-          dottedCellBefore.innerHTML = '&#183';
+          dottedCellBefore.innerHTML =
+            '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
           dottedCellBefore.style.fontSize = '2rem';
           dottedCellBefore.style.background = '#CAD2E3';
           dottedCellBefore.classList.remove('hover');
@@ -445,7 +467,8 @@ export function updateAiBoard(aiBoard, attackedIndex) {
           const dottedCellAfter = board.querySelector(
             `.block[data-x-index="${xIndex}"][data-y-index="${endIndex + 1}"]`,
           );
-          dottedCellAfter.innerHTML = '&#183';
+          dottedCellAfter.innerHTML =
+            '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
           dottedCellAfter.style.fontSize = '2rem';
           dottedCellAfter.style.background = '#CAD2E3';
           dottedCellAfter.classList.remove('hover');
@@ -458,7 +481,8 @@ export function updateAiBoard(aiBoard, attackedIndex) {
             const dottedCellRight = board.querySelector(
               `.block[data-x-index="${xIndex + 1}"][data-y-index="${yIndex}"]`,
             );
-            dottedCellRight.innerHTML = '&#183';
+            dottedCellRight.innerHTML =
+              '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
             dottedCellRight.style.fontSize = '2rem';
             dottedCellRight.style.background = '#CAD2E3';
             dottedCellRight.classList.remove('hover');
@@ -469,7 +493,8 @@ export function updateAiBoard(aiBoard, attackedIndex) {
             const dottedCellLeft = board.querySelector(
               `.block[data-x-index="${xIndex - 1}"][data-y-index="${yIndex}"]`,
             );
-            dottedCellLeft.innerHTML = '&#183';
+            dottedCellLeft.innerHTML =
+              '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
             dottedCellLeft.style.fontSize = '2rem';
             dottedCellLeft.style.background = '#CAD2E3';
             dottedCellLeft.classList.remove('hover');
@@ -493,7 +518,8 @@ export function updateAiBoard(aiBoard, attackedIndex) {
       }
     }
   } else {
-    attackedCell.innerHTML = '&#183';
+    attackedCell.innerHTML =
+      '<svg width="10" height="10" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="256" fill-rule="evenodd"/></svg>';
     attackedCell.style.fontSize = '2rem';
     attackedCell.style.background = '#CAD2E3';
   }
