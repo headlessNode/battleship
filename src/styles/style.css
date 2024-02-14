@@ -85,9 +85,9 @@
     grid-column: 1/3;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(355px, 1fr));
     justify-items: center;
-    gap: 5rem;
+    gap: 20px;
 }
 
 .board-one .row, .board-two .row, .initial-board .row{
