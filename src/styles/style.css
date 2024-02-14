@@ -16,6 +16,7 @@
 
 .header{
     height: 100%;
+    width: 100%;
     font-size: 30px;
     display: grid;
     align-items: center;
@@ -41,13 +42,17 @@
 .orientation-btn{
     cursor: pointer;
     width: 6rem;
-    height: 30px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
     border: none;
-    background: #b4b4ff;
+    background: #C2C2FF;
     border-radius: 5px;
+}
+
+.orientation-btn:hover{
+    background: #9999FF;
 }
 
 .current-ship{
